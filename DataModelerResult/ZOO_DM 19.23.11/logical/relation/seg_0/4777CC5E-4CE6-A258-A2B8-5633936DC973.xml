@@ -1,0 +1,21 @@
+<?xml version = '1.0' encoding = 'UTF-8'?>
+<Relation class="oracle.dbtools.crest.model.design.logical.Relation" name="Food_Diet_fk" directorySegmentName="seg_0" id="4777CC5E-4CE6-A258-A2B8-5633936DC973">
+<createdBy>Larisa</createdBy>
+<createdTime>2022-11-08 18:39:07 UTC</createdTime>
+<ownerDesignName>ZOO_DM</ownerDesignName>
+<engineerTo>
+<item key="36A68C80-3A7C-9C3A-0F1F-D6FD2EC2FACD" value="true"/>
+</engineerTo>
+<sourcePk>77601F8D-D17C-CE80-7129-909EB4CB5985</sourcePk>
+<identifying>true</identifying>
+<nameOnSource>types food</nameOnSource>
+<nameOnTarget>for animal&apos;sl diet</nameOnTarget>
+<optionalSource>true</optionalSource>
+<optionalTarget>false</optionalTarget>
+<sourceCardinality>1</sourceCardinality>
+<sourceEntity>6BD63C2C-54A4-8150-076D-16E10264CB06</sourceEntity>
+<targetCardinalityString>*</targetCardinalityString>
+<targetEntity>9C0CFF72-43C0-68D1-9EB0-19E8CAB138AF</targetEntity>
+<transferable>true</transferable>
+<deleteRule>NO ACTION</deleteRule>
+</Relation>

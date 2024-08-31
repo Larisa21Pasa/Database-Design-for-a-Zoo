@@ -1,0 +1,15 @@
+<?xml version = '1.0' encoding = 'UTF-8'?>
+<TriggerOraclev10g class="oracle.dbtools.crest.model.design.storage.oracle.v10g.TriggerOraclev10g" name="animal_info_birth_date_check_trg" directorySegmentName="seg_0" id="9125669E-440A-37B6-E557-DB6D52D6C798">
+<createdBy>adim</createdBy>
+<createdTime>2024-04-24 19:39:02 UTC</createdTime>
+<ownerDesignName>ZOO_DM</ownerDesignName>
+<actions>INSERT, UPDATE</actions>
+<body><![CDATA[BEGIN
+	IF :new.birth_date > SYSDATE  THEN
+	   RAISE_APPLICATION_ERROR(-20001, 'Datele de nastere nu pot fi in viitor.');
+	END IF;
+END;]]></body>
+<triggerTime>BEFORE</triggerTime>
+<state>ENABLE</state>
+<table>B97C0872-97FC-4DDE-D7D1-C06726A8D5BB</table>
+</TriggerOraclev10g>

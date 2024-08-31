@@ -1,0 +1,131 @@
+<?xml version = '1.0' encoding = 'UTF-8'?>
+<Entity class="oracle.dbtools.crest.model.design.logical.Entity" directorySegmentName="seg_0" id="7119FB16-94B8-F805-8E02-A9129648C2DA" name="Medical_Info">
+<createdBy>Larisa</createdBy>
+<createdTime>2022-11-08 16:29:33 UTC</createdTime>
+<comment><![CDATA[contains records about medical life of animals to let employees know how every animal is feeling]]></comment>
+<commentInRDBMS><![CDATA[contains records about medical life of animals to let employees know how every animal is feeling]]></commentInRDBMS>
+<ownerDesignName>ZOO_DM</ownerDesignName>
+<engineerTo>
+<item key="36A68C80-3A7C-9C3A-0F1F-D6FD2EC2FACD" value="true"/>
+</engineerTo>
+<adequatelyNormalized>NO</adequatelyNormalized>
+<expectedVolumes>0</expectedVolumes>
+<fwdEngineeringStrategyName>Single Table</fwdEngineeringStrategyName>
+<growthPercent>0</growthPercent>
+<growthType>Year</growthType>
+<maxVolumes>9999999</maxVolumes>
+<minVolumes>0</minVolumes>
+<normalForm>Third</normalForm>
+<attributes itemClass="oracle.dbtools.crest.model.design.logical.Attribute">
+<Attribute name="ID_Medical_Info" id="7B0868CE-D5CC-2D89-4542-173E254CE384">
+<createdBy>Larisa</createdBy>
+<createdTime>2022-11-08 16:49:15 UTC</createdTime>
+<ownerDesignName>ZOO_DM</ownerDesignName>
+<engineerTo>
+<item key="36A68C80-3A7C-9C3A-0F1F-D6FD2EC2FACD" value="true"/>
+</engineerTo>
+<useDomainConstraints>false</useDomainConstraints>
+<use>1</use>
+<logicalDatatype>LOGDT019</logicalDatatype>
+<dataTypePrecision>2</dataTypePrecision>
+<ownDataTypeParameters>,2,</ownDataTypeParameters>
+</Attribute>
+<Attribute name="ID_Animals" id="116E2B58-3F53-AE50-47F6-6B2332AC2266">
+<createdBy>Larisa</createdBy>
+<createdTime>2022-11-08 16:51:57 UTC</createdTime>
+<generatorID>0035BA67-8E20-5CF9-D309-F521B0318CD6</generatorID>
+<ownerDesignName>ZOO_DM</ownerDesignName>
+<engineerTo>
+<item key="36A68C80-3A7C-9C3A-0F1F-D6FD2EC2FACD" value="true"/>
+</engineerTo>
+<referedAttribute>9E9D6FDB-3020-EF7A-FE07-EC33A60D525E</referedAttribute>
+<useDomainConstraints>false</useDomainConstraints>
+<use>1</use>
+<logicalDatatype>LOGDT019</logicalDatatype>
+<dataTypePrecision>3</dataTypePrecision>
+<ownDataTypeParameters>,3,</ownDataTypeParameters>
+</Attribute>
+<Attribute name="Data_Registration" id="5D2AA115-F9DB-05F0-3FC3-D85160B56650">
+<createdBy>Larisa</createdBy>
+<createdTime>2022-11-08 16:39:39 UTC</createdTime>
+<ownerDesignName>ZOO_DM</ownerDesignName>
+<engineerTo>
+<item key="36A68C80-3A7C-9C3A-0F1F-D6FD2EC2FACD" value="true"/>
+</engineerTo>
+<useDomainConstraints>false</useDomainConstraints>
+<use>1</use>
+<logicalDatatype>LOGDT007</logicalDatatype>
+<ownDataTypeParameters>,,</ownDataTypeParameters>
+</Attribute>
+<Attribute name="Birth_Date" id="5D3D3E5E-A558-61AA-4D79-739173802820">
+<createdBy>Larisa</createdBy>
+<createdTime>2022-11-08 16:43:27 UTC</createdTime>
+<ownerDesignName>ZOO_DM</ownerDesignName>
+<engineerTo>
+<item key="36A68C80-3A7C-9C3A-0F1F-D6FD2EC2FACD" value="true"/>
+</engineerTo>
+<useDomainConstraints>false</useDomainConstraints>
+<use>1</use>
+<logicalDatatype>LOGDT007</logicalDatatype>
+<ownDataTypeParameters>,,</ownDataTypeParameters>
+</Attribute>
+<Attribute name="Children" id="E002B14C-CA23-478F-9447-887F9BF2AED0">
+<createdBy>Larisa</createdBy>
+<createdTime>2022-11-08 16:35:46 UTC</createdTime>
+<ownerDesignName>ZOO_DM</ownerDesignName>
+<engineerTo>
+<item key="36A68C80-3A7C-9C3A-0F1F-D6FD2EC2FACD" value="true"/>
+</engineerTo>
+<useDomainConstraints>false</useDomainConstraints>
+<use>1</use>
+<logicalDatatype>LOGDT024</logicalDatatype>
+<dataTypeSize>5</dataTypeSize>
+<listOfValues>
+<valueDef value="No" description=""/>
+<valueDef value="Yes" description=""/>
+</listOfValues>
+<ownDataTypeParameters>5,,</ownDataTypeParameters>
+</Attribute>
+<Attribute name="Surgery" id="D08D8676-FC09-EBD6-EDAB-289E131B465E">
+<createdBy>Larisa</createdBy>
+<createdTime>2022-11-08 16:40:18 UTC</createdTime>
+<ownerDesignName>ZOO_DM</ownerDesignName>
+<engineerTo>
+<item key="36A68C80-3A7C-9C3A-0F1F-D6FD2EC2FACD" value="true"/>
+</engineerTo>
+<useDomainConstraints>false</useDomainConstraints>
+<use>1</use>
+<logicalDatatype>LOGDT024</logicalDatatype>
+<dataTypeSize>50</dataTypeSize>
+<ownDataTypeParameters>50,,</ownDataTypeParameters>
+</Attribute>
+<Attribute name="Medication" id="54E1663A-41E4-7541-A1BA-82F3553B17EA">
+<createdBy>Larisa</createdBy>
+<createdTime>2022-11-08 16:47:08 UTC</createdTime>
+<ownerDesignName>ZOO_DM</ownerDesignName>
+<engineerTo>
+<item key="36A68C80-3A7C-9C3A-0F1F-D6FD2EC2FACD" value="true"/>
+</engineerTo>
+<useDomainConstraints>false</useDomainConstraints>
+<use>1</use>
+<logicalDatatype>LOGDT024</logicalDatatype>
+<dataTypeSize>50</dataTypeSize>
+<ownDataTypeParameters>50,,</ownDataTypeParameters>
+</Attribute>
+</attributes>
+<identifiers itemClass="oracle.dbtools.crest.model.design.logical.CandidateKey">
+<identifier id="A22B2362-6ED2-8636-A094-0F10023372BC" name="Medical_Info PK">
+<createdBy>Larisa</createdBy>
+<createdTime>2022-11-08 16:49:34 UTC</createdTime>
+<ownerDesignName>ZOO_DM</ownerDesignName>
+<shouldEngineer>false</shouldEngineer>
+<engineerTo>
+<item key="36A68C80-3A7C-9C3A-0F1F-D6FD2EC2FACD" value="false"/>
+</engineerTo>
+<pk>true</pk>
+<usedAttributes>
+<attributeRef>7B0868CE-D5CC-2D89-4542-173E254CE384</attributeRef>
+</usedAttributes>
+</identifier>
+</identifiers>
+</Entity>

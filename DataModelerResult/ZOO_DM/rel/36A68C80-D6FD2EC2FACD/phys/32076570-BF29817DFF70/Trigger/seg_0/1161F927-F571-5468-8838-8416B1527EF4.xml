@@ -1,0 +1,14 @@
+<?xml version = '1.0' encoding = 'UTF-8'?>
+<TriggerOraclev10g class="oracle.dbtools.crest.model.design.storage.oracle.v10g.TriggerOraclev10g" name="food_quantity_check_trg" directorySegmentName="seg_0" id="1161F927-F571-5468-8838-8416B1527EF4">
+<createdBy>adim</createdBy>
+<createdTime>2024-04-24 19:40:03 UTC</createdTime>
+<ownerDesignName>ZOO_DM</ownerDesignName>
+<actions>INSERT, UPDATE</actions>
+<body><![CDATA[BEGIN
+    IF :new.quantity_wk_food <= 0 THEN
+        RAISE_APPLICATION_ERROR(-20002, 'Cantitatea de mancare saptamanala alocata animalelor trebuie să fie mai mare decât zero.');
+    END IF;
+END;]]></body>
+<triggerTime>BEFORE</triggerTime>
+<table>283622BB-1818-3CF5-19BC-FCC458B94005</table>
+</TriggerOraclev10g>

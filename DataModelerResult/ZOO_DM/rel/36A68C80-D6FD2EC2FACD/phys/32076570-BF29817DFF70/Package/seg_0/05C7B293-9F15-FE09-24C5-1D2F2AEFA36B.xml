@@ -1,0 +1,351 @@
+<?xml version = '1.0' encoding = 'UTF-8'?>
+<PackageOracle class="oracle.dbtools.crest.model.design.storage.oracle.PackageOracle" name="animals_package" directorySegmentName="seg_0" id="05C7B293-9F15-FE09-24C5-1D2F2AEFA36B">
+<createdBy>adim</createdBy>
+<createdTime>2024-04-25 13:48:45 UTC</createdTime>
+<ownerDesignName>ZOO_DM</ownerDesignName>
+<source>CREATE OR REPLACE PACKAGE animals_package AS
+    PROCEDURE add_animal (
+         p_id_type     IN animals.id_animal_type%TYPE,
+        p_id_pen      IN animals.id_animal_pen%TYPE,
+        p_name        IN animal_info.name%TYPE,
+        p_birth_date  IN animal_info.birth_date%TYPE,
+        p_gender      IN animal_info.gender%TYPE
+    );
+
+    PROCEDURE delete_animal (
+        p_id_animal IN animals.id_animals%TYPE
+    );
+
+    PROCEDURE update_animal (
+        p_id_animal IN animals.id_animals%TYPE,
+        p_choice    IN VARCHAR2,
+        p_updated   IN VARCHAR2
+    );
+
+    PROCEDURE display_animal;
+    PROCEDURE display_animal_info;
+END animals_package;
+/
+
+CREATE OR REPLACE PACKAGE BODY animals_package AS
+
+    PROCEDURE add_animal (
+        p_id_type     IN animals.id_animal_type%TYPE,
+        p_id_pen      IN animals.id_animal_pen%TYPE,
+        p_name        IN animal_info.name%TYPE,
+        p_birth_date  IN animal_info.birth_date%TYPE,
+        p_gender      IN animal_info.gender%TYPE
+    ) IS
+        v_count NUMBER;
+    BEGIN
+        SAVEPOINT savepoint_add_animal ;
+        BEGIN
+            IF p_id_type IS NULL 
+            OR p_id_pen IS NULL 
+            OR p_name IS NULL 
+            OR p_birth_date IS NULL 
+            OR p_gender IS NULL THEN
+                RAISE_APPLICATION_ERROR(-20001, &apos;All fields must be provided.&apos;);
+            END IF;
+    
+            SELECT COUNT(*)
+            INTO   v_count
+            FROM   animal_type
+            WHERE  id_animal_type = p_id_type;
+    
+            IF v_count = 0 THEN
+                RAISE_APPLICATION_ERROR(-20011, &apos;Invalid animal type ID.&apos;);
+            END IF;
+    
+            SELECT COUNT(*)
+            INTO   v_count
+            FROM   animal_pen
+            WHERE  id_animal_pen = p_id_pen;
+    
+            IF v_count = 0 THEN
+                RAISE_APPLICATION_ERROR(-20012, &apos;Invalid animal pen ID.&apos;);
+            END IF;
+    
+            INSERT INTO animals (
+                ID_Animal_Type,
+                ID_Animal_Pen
+            ) VALUES (
+                p_id_type,
+                p_id_pen
+            );
+    
+            INSERT INTO animal_info (
+                Name,
+                Birth_Date,
+                Gender
+            ) VALUES (
+                p_name,
+                p_birth_date,
+                p_gender
+            );
+    
+            COMMIT;
+        EXCEPTION
+    
+            WHEN dup_val_on_index THEN
+                ROLLBACK TO savepoint_add_animal;
+                RAISE_APPLICATION_ERROR(-20001, &apos;An animal with the same id already exists.&apos;);
+                
+            WHEN OTHERS THEN
+                ROLLBACK TO savepoint_add_animal;
+                RAISE_APPLICATION_ERROR(-20002, &apos;Error when trying to add animal  to db &apos; || SQLERRM);
+
+        END;
+        
+    
+    END add_animal;
+    
+    
+    
+    PROCEDURE delete_animal (
+        p_id_animal IN animals.id_animals%TYPE
+    ) IS
+        v_count NUMBER;
+    BEGIN
+        SAVEPOINT delete_animal_savepoint;
+
+        BEGIN
+          -- CHECK IF ID IS VALID
+            IF p_id_animal IS NULL OR p_id_animal = &apos;&apos; THEN
+                RAISE_APPLICATION_ERROR(-20003, &apos;ID animal must not be empty.&apos;);
+            END IF;
+                
+            --CHECK FOR ANIMAL ID IN CENTRAL TABEL -&gt; ANIMALS
+            SELECT COUNT(*)
+            INTO   v_count
+            FROM   animals
+            WHERE  id_animals = p_id_animal;
+
+            IF v_count = 0 THEN
+                RAISE_APPLICATION_ERROR(-20004, &apos;You are trying to delete an invalid animal ID.&apos;);
+            END IF;
+
+            -- CHECK IF EXISTS IN DIET
+            SELECT COUNT(*)
+            INTO   v_count
+            FROM   diet
+            WHERE  id_animals = p_id_animal; 
+
+            IF v_count &gt; 0 THEN
+                -- DELETE FROM DIET AND CHECK FOR SUCCESS DELETE
+                DELETE FROM diet
+                WHERE  id_animals = p_id_animal;
+                
+                IF SQL%NOTFOUND THEN
+                    RAISE_APPLICATION_ERROR(-20017, &apos;Error deleting from diet.&apos;);
+                END IF;
+            END IF;
+
+            -- CHECK IF EXISTS IN MEDICAL INFO
+            SELECT COUNT(*)
+            INTO   v_count
+            FROM   medical_info
+            WHERE  id_animals = p_id_animal;
+
+            IF v_count &gt; 0 THEN
+                -- DELETE FROM MEDICAL INFO AND CHECK FOR SUCCESS DELETE
+                DELETE FROM medical_info
+                WHERE  id_animals = p_id_animal;
+                
+                IF SQL%NOTFOUND THEN
+                    RAISE_APPLICATION_ERROR(-20018, &apos;Error deleting from medical_info.&apos;);
+                END IF;
+            END IF;
+
+            -- CHECK IF EXISTS IN ANIMAL INFO
+            SELECT COUNT(*)
+            INTO   v_count
+            FROM   animal_info
+            WHERE  id_animals = p_id_animal;
+
+            IF v_count &gt; 0 THEN
+                -- DELETE FROM ANIMAL INFO AND CHECK FOR SUCCESS DELETE
+                DELETE FROM animal_info
+                WHERE  id_animals = p_id_animal;
+                
+                IF SQL%NOTFOUND THEN
+                    RAISE_APPLICATION_ERROR(-20019, &apos;Error deleting from animal_info.&apos;);
+                END IF;
+            END IF;
+
+            -- PROPER DELETE OF ANIMAL 
+            DELETE FROM animals
+            WHERE  id_animals = p_id_animal;
+            
+            -- CHECK FOR SUCCESSFUL DELETE OPERATION
+            IF SQL%NOTFOUND THEN
+                ROLLBACK TO delete_animal_savepoint;
+                RAISE_APPLICATION_ERROR(-20005, &apos;aNIMAL with ID &apos; || p_id_animal || &apos; has not been deleted.&apos;);
+            END IF;
+            
+            COMMIT; -- COMMIT TRANSACTION
+        EXCEPTION
+            WHEN OTHERS THEN
+                ROLLBACK TO delete_animal_savepoint;
+                RAISE_APPLICATION_ERROR(-20020, &apos;Error in deleting animal: &apos; || SQLERRM);
+        END;
+    END delete_animal;
+    
+    
+    
+    PROCEDURE update_animal (
+        p_id_animal IN animals.id_animals%TYPE,
+        p_choice    IN VARCHAR2,
+        p_updated   IN VARCHAR2
+    ) IS
+        e_no_rows        EXCEPTION;
+        e_bad_choice     EXCEPTION;
+        v_count          NUMBER;
+    BEGIN
+        SAVEPOINT update_animal_savepoint;
+
+        BEGIN 
+            -- FIRST CHECK FOR FK SO IT MUST EXISTS
+            IF (p_choice = &apos;id_animal_type&apos;) THEN
+                IF p_updated IS NULL THEN
+                      RAISE_APPLICATION_ERROR(-20010, &apos;New value must not be null.&apos;);
+                END IF;
+                
+                SELECT COUNT(*)
+                INTO v_count
+                FROM animal_type
+                WHERE id_animal_type = TO_NUMBER(p_updated);
+                
+                IF v_count = 0 THEN
+                    RAISE_APPLICATION_ERROR(-20202, &apos;New id animal type does not exists&apos;);
+                END IF;
+       
+                UPDATE animals
+                SET id_animal_type = TO_NUMBER(p_updated)
+                WHERE id_animals = p_id_animal;
+                
+                 IF SQL%NOTFOUND THEN
+                        RAISE e_no_rows;
+                    END IF;
+            -- FIRST CHECK FOR FK SO IT MUST EXISTS
+            ELSIF (p_choice = &apos;id_animal_pen&apos;) THEN
+                IF p_updated IS NULL THEN
+                      RAISE_APPLICATION_ERROR(-20010, &apos;New value must not be null.&apos;);
+                END IF;
+                
+                SELECT COUNT(*)
+                INTO v_count
+                FROM animal_pen
+                WHERE id_animal_pen = TO_NUMBER(p_updated);
+                
+                IF v_count = 0 THEN
+                    RAISE_APPLICATION_ERROR(-20202, &apos;New id animal pen does not exists&apos;);
+                END IF;
+                
+             
+                UPDATE animals
+                SET id_animal_pen = TO_NUMBER(p_updated)
+                WHERE id_animals = p_id_animal;
+                
+            -- REST OF FIELDS FROM ANIMAL_INFO  
+            ELSIF (p_choice = &apos;name&apos;) THEN
+                IF p_updated IS NULL THEN
+                      RAISE_APPLICATION_ERROR(-20010, &apos;New value must not be null.&apos;);
+                END IF;
+                
+                UPDATE animal_info
+                SET name = p_updated
+                WHERE id_animals = p_id_animal;
+                
+                 IF SQL%NOTFOUND THEN
+                    RAISE e_no_rows;
+                END IF;
+            
+            ELSIF (p_choice = &apos;birth_date&apos;) THEN
+                IF p_updated IS NULL THEN
+                      RAISE_APPLICATION_ERROR(-20010, &apos;New value must not be null.&apos;);
+                END IF;
+                
+                UPDATE animal_info
+                SET birth_date = TO_DATE(p_updated, &apos;yyyy-mm-dd&apos;)
+                WHERE id_animals = p_id_animal;
+                
+                 IF SQL%NOTFOUND THEN
+                    RAISE e_no_rows;
+                END IF;
+                
+            ELSIF (p_choice = &apos;gender&apos;) THEN
+                IF p_updated IS NULL THEN
+                      RAISE_APPLICATION_ERROR(-20010, &apos;New value must not be null.&apos;);
+                END IF;
+                
+                UPDATE animal_info
+                SET gender = p_updated
+                WHERE id_animals = p_id_animal;
+                
+                 IF SQL%NOTFOUND THEN
+                    RAISE e_no_rows;
+                END IF;
+            ELSE
+                RAISE e_bad_choice;
+            END IF;
+
+            COMMIT;
+        EXCEPTION
+            WHEN e_bad_choice THEN
+                RAISE_APPLICATION_ERROR(-20201,  &apos;No attribute like &apos;||p_choice||&apos; found !&apos;);
+            WHEN e_no_rows THEN
+                RAISE_APPLICATION_ERROR(-20201, &apos;Animal with id &apos; || p_id_animal || &apos; does not exists.&apos;);
+            WHEN OTHERS THEN
+                ROLLBACK TO update_animal_savepoint;
+                RAISE_APPLICATION_ERROR(-20002, &apos;Error in updating &apos; || p_id_animal || &apos;: &apos; || SQLERRM);
+        
+        END; 
+
+    
+    END update_animal;
+
+    
+    
+    
+    
+    PROCEDURE display_animal IS
+    BEGIN
+        FOR rec IN (SELECT a.id_animals,
+                           at.type_animal,
+                           ap.name_pen,
+                           ai.name,
+                           ai.birth_date,
+                           ai.gender
+                    FROM animals a
+                    JOIN animal_type at ON a.id_animal_type = at.id_animal_type
+                    JOIN animal_pen ap ON a.id_animal_pen = ap.id_animal_pen
+                    JOIN animal_info ai ON a.id_animals = ai.id_animals)
+        LOOP
+            DBMS_OUTPUT.PUT_LINE(&apos;Animal ID: &apos; || rec.id_animals);
+            DBMS_OUTPUT.PUT_LINE(&apos;Animal Type: &apos; || rec.type_animal);
+            DBMS_OUTPUT.PUT_LINE(&apos;Animal Pen: &apos; || rec.name_pen);
+            DBMS_OUTPUT.PUT_LINE(&apos;Name: &apos; || rec.name);
+            DBMS_OUTPUT.PUT_LINE(&apos;Birth Date: &apos; || TO_CHAR(rec.birth_date, &apos;yyyy-mm-dd&apos;));
+            DBMS_OUTPUT.PUT_LINE(&apos;Gender: &apos; || rec.gender);
+            DBMS_OUTPUT.PUT_LINE(&apos;-------------------------&apos;);
+        END LOOP;
+    END display_animal;
+
+    PROCEDURE display_animal_info IS
+    BEGIN
+        FOR rec IN (SELECT id_animals,
+                           name,
+                           birth_date,
+                           gender
+                    FROM animal_info)
+        LOOP
+            DBMS_OUTPUT.PUT_LINE(&apos;Animal ID: &apos; || rec.id_animals);
+            DBMS_OUTPUT.PUT_LINE(&apos;Name: &apos; || rec.name);
+            DBMS_OUTPUT.PUT_LINE(&apos;Birth Date: &apos; || TO_CHAR(rec.birth_date, &apos;yyyy-mm-dd&apos;));
+            DBMS_OUTPUT.PUT_LINE(&apos;Gender: &apos; || rec.gender);
+            DBMS_OUTPUT.PUT_LINE(&apos;-------------------------&apos;);
+        END LOOP;
+    END display_animal_info;
+END animals_package;</source>
+</PackageOracle>

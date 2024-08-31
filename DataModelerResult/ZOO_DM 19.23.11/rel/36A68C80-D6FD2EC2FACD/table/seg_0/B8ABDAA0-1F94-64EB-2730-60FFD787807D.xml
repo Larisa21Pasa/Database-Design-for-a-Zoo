@@ -1,0 +1,131 @@
+<?xml version = '1.0' encoding = 'UTF-8'?>
+<Table class="oracle.dbtools.crest.model.design.relational.Table" directorySegmentName="seg_0" id="B8ABDAA0-1F94-64EB-2730-60FFD787807D" name="Diet">
+<createdBy>llari</createdBy>
+<createdTime>2022-12-12 19:03:49 UTC</createdTime>
+<comment><![CDATA[diet contains type of food and for what animal is it suitable for]]></comment>
+<commentInRDBMS><![CDATA[diet contains type of food and for what animal is it suitable for]]></commentInRDBMS>
+<generatorID>9C0CFF72-43C0-68D1-9EB0-19E8CAB138AF</generatorID>
+<ownerDesignName>ZOO_DM</ownerDesignName>
+<allowColumnReorder>false</allowColumnReorder>
+<existDependencyGenerateInDDl>true</existDependencyGenerateInDDl>
+<parsed>true</parsed>
+<columns itemClass="oracle.dbtools.crest.model.design.relational.Column">
+<Column name="ID_Diet" id="D07CA8FA-7915-9183-1E1E-06B71746441F">
+<createdBy>llari</createdBy>
+<createdTime>2022-12-12 19:03:49 UTC</createdTime>
+<generatorID>C6D36837-44A3-F38A-2B30-01EAAA2DE4FA</generatorID>
+<ownerDesignName>ZOO_DM</ownerDesignName>
+<useDomainConstraints>false</useDomainConstraints>
+<use>1</use>
+<logicalDatatype>LOGDT019</logicalDatatype>
+<dataTypePrecision>5</dataTypePrecision>
+<ownDataTypeParameters>,5,</ownDataTypeParameters>
+<autoIncrementColumn>true</autoIncrementColumn>
+<autoIncrementCycle>false</autoIncrementCycle>
+</Column>
+<Column name="ID_Food" id="AE77416B-48C3-0C25-BAEB-05D2BA749050">
+<createdBy>llari</createdBy>
+<createdTime>2022-12-12 19:03:49 UTC</createdTime>
+<generatorID>A631B0EB-AE12-CE47-AD64-AAE67F0B6836</generatorID>
+<ownerDesignName>ZOO_DM</ownerDesignName>
+<useDomainConstraints>false</useDomainConstraints>
+<use>1</use>
+<logicalDatatype>LOGDT019</logicalDatatype>
+<dataTypePrecision>2</dataTypePrecision>
+<ownDataTypeParameters>,2,</ownDataTypeParameters>
+<previousColumn>false</previousColumn>
+<autoIncrementCycle>false</autoIncrementCycle>
+<associations>
+<colAssociation fkAssociation="803F4242-F248-9F9F-5C39-A58E2CAEB06C" referredColumn="A73A733B-64F7-A87D-11C5-18A38AFA722D"/>
+</associations>
+</Column>
+<Column name="ID_Animals" id="BD8F4611-4B08-F28C-A61B-5E17367FFBCA">
+<createdBy>llari</createdBy>
+<createdTime>2022-12-12 19:03:49 UTC</createdTime>
+<generatorID>E3D24053-E8DA-6491-8B04-823B350C7E85</generatorID>
+<ownerDesignName>ZOO_DM</ownerDesignName>
+<useDomainConstraints>false</useDomainConstraints>
+<use>1</use>
+<logicalDatatype>LOGDT019</logicalDatatype>
+<dataTypePrecision>3</dataTypePrecision>
+<ownDataTypeParameters>,3,</ownDataTypeParameters>
+<previousColumn>false</previousColumn>
+<autoIncrementCycle>false</autoIncrementCycle>
+<associations>
+<colAssociation fkAssociation="BB855C77-19CE-86CF-0FE8-C89236AB7D38" referredColumn="CAB44045-9F9D-619A-F524-8F9E86D19835"/>
+</associations>
+</Column>
+<Column name="Diet_Type" id="B894663B-A40D-FE34-47EA-9436AA5EE985">
+<createdBy>llari</createdBy>
+<createdTime>2022-12-12 19:03:49 UTC</createdTime>
+<generatorID>B2577942-04D3-45EA-0280-3A0D5397D670</generatorID>
+<ownerDesignName>ZOO_DM</ownerDesignName>
+<constraintName>Check_Diet_Type</constraintName>
+<useDomainConstraints>false</useDomainConstraints>
+<use>1</use>
+<logicalDatatype>LOGDT024</logicalDatatype>
+<dataTypeSize>20</dataTypeSize>
+<listOfValues>
+<valueDef value="Carnivor" description=""/>
+<valueDef value="Erbivor" description=""/>
+<valueDef value="Omnivor" description=""/>
+</listOfValues>
+<ownDataTypeParameters>20,,</ownDataTypeParameters>
+<autoIncrementCycle>false</autoIncrementCycle>
+</Column>
+<Column name="Quantity" id="F9F3FC24-D6CB-B78A-0635-B9F8B106EE8F">
+<createdBy>llari</createdBy>
+<createdTime>2022-12-12 19:03:49 UTC</createdTime>
+<generatorID>71589F37-EBF4-94BF-9CEB-44E47F147244</generatorID>
+<ownerDesignName>ZOO_DM</ownerDesignName>
+<constraintName>Diet_Cantity_ck</constraintName>
+<useDomainConstraints>false</useDomainConstraints>
+<use>1</use>
+<logicalDatatype>LOGDT019</logicalDatatype>
+<dataTypePrecision>2</dataTypePrecision>
+<checkConstraint>
+<implementationDef dbType="Generic Constraint" definition="regexp_like(Cantity, &apos;[+-]?([0-9]*[.])?[0-9]+&apos;)"/>
+</checkConstraint>
+<ownDataTypeParameters>,2,</ownDataTypeParameters>
+<autoIncrementCycle>false</autoIncrementCycle>
+</Column>
+</columns>
+<indexes itemClass="oracle.dbtools.crest.model.design.relational.Index">
+<ind_PK_UK id="E671CFC2-FE3E-8598-59CB-9153B8BC17A9" name="Diet_PK">
+<createdBy>llari</createdBy>
+<createdTime>2022-12-12 19:03:49 UTC</createdTime>
+<generatorID>ED964D76-60EE-96DD-C31F-2BE6CC08D3A0</generatorID>
+<ownerDesignName>ZOO_DM</ownerDesignName>
+<pk>true</pk>
+<indexState>Primary Constraint</indexState>
+<isSurrogateKey>false</isSurrogateKey>
+<indexColumnUsage>
+<colUsage columnID="D07CA8FA-7915-9183-1E1E-06B71746441F"/>
+<colUsage columnID="AE77416B-48C3-0C25-BAEB-05D2BA749050"/>
+<colUsage columnID="BD8F4611-4B08-F28C-A61B-5E17367FFBCA"/>
+</indexColumnUsage>
+</ind_PK_UK>
+<ind_PK_UK id="341DAE05-393C-ECB8-D497-ADB53609254E" name="Animals_Diet_fk">
+<createdBy>llari</createdBy>
+<createdTime>2022-12-12 19:03:49 UTC</createdTime>
+<generatorID>962C2DDB-6521-8F1B-9836-0CC28A404D7F</generatorID>
+<ownerDesignName>ZOO_DM</ownerDesignName>
+<indexState>Foreign Key</indexState>
+<isSurrogateKey>false</isSurrogateKey>
+<indexColumnUsage>
+<colUsage columnID="BD8F4611-4B08-F28C-A61B-5E17367FFBCA"/>
+</indexColumnUsage>
+</ind_PK_UK>
+<ind_PK_UK id="68FDEA45-C547-6070-5E74-365D4708FF0E" name="Food_Diet_fk">
+<createdBy>llari</createdBy>
+<createdTime>2022-12-12 19:03:49 UTC</createdTime>
+<generatorID>4777CC5E-4CE6-A258-A2B8-5633936DC973</generatorID>
+<ownerDesignName>ZOO_DM</ownerDesignName>
+<indexState>Foreign Key</indexState>
+<isSurrogateKey>false</isSurrogateKey>
+<indexColumnUsage>
+<colUsage columnID="AE77416B-48C3-0C25-BAEB-05D2BA749050"/>
+</indexColumnUsage>
+</ind_PK_UK>
+</indexes>
+</Table>

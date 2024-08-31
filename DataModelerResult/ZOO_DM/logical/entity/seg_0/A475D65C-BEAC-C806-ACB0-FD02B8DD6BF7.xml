@@ -1,0 +1,85 @@
+<?xml version = '1.0' encoding = 'UTF-8'?>
+<Entity class="oracle.dbtools.crest.model.design.logical.Entity" directorySegmentName="seg_0" id="A475D65C-BEAC-C806-ACB0-FD02B8DD6BF7" name="Animal_Type">
+<createdBy>student</createdBy>
+<createdTime>2022-11-04 10:20:21 UTC</createdTime>
+<comment><![CDATA[generic type of animals wich help to identify characteristics of an animal]]></comment>
+<commentInRDBMS><![CDATA[generic type of animals wich help to identify characteristics of an animal]]></commentInRDBMS>
+<ownerDesignName>ZOO_DM</ownerDesignName>
+<engineerTo>
+<item key="36A68C80-3A7C-9C3A-0F1F-D6FD2EC2FACD" value="true"/>
+</engineerTo>
+<adequatelyNormalized>NO</adequatelyNormalized>
+<expectedVolumes>0</expectedVolumes>
+<fwdEngineeringStrategyName>Single Table</fwdEngineeringStrategyName>
+<growthPercent>0</growthPercent>
+<growthType>Year</growthType>
+<maxVolumes>9999999</maxVolumes>
+<minVolumes>0</minVolumes>
+<normalForm>Third</normalForm>
+<attributes itemClass="oracle.dbtools.crest.model.design.logical.Attribute">
+<Attribute name="ID_Animal_Type" id="62166999-A768-AD9B-47D3-3AF38468C38B">
+<createdBy>student</createdBy>
+<createdTime>2022-11-04 10:21:37 UTC</createdTime>
+<ownerDesignName>ZOO_DM</ownerDesignName>
+<engineerTo>
+<item key="36A68C80-3A7C-9C3A-0F1F-D6FD2EC2FACD" value="true"/>
+</engineerTo>
+<useDomainConstraints>false</useDomainConstraints>
+<use>1</use>
+<logicalDatatype>LOGDT019</logicalDatatype>
+<dataTypePrecision>2</dataTypePrecision>
+<ownDataTypeParameters>,2,</ownDataTypeParameters>
+</Attribute>
+<Attribute name="Type_animal" id="94EBE8CB-A471-F3CE-AB8E-3C4A1695F932">
+<createdBy>student</createdBy>
+<createdTime>2022-11-04 10:22:52 UTC</createdTime>
+<ownerDesignName>ZOO_DM</ownerDesignName>
+<engineerTo>
+<item key="36A68C80-3A7C-9C3A-0F1F-D6FD2EC2FACD" value="true"/>
+</engineerTo>
+<useDomainConstraints>false</useDomainConstraints>
+<use>1</use>
+<logicalDatatype>LOGDT024</logicalDatatype>
+<dataTypeSize>50</dataTypeSize>
+<listOfValues>
+<valueDef value="Arachnids" description=""/>
+<valueDef value="Bird" description=""/>
+<valueDef value="Canine" description=""/>
+<valueDef value="Feline" description=""/>
+<valueDef value="Fish" description=""/>
+<valueDef value="Insect" description=""/>
+<valueDef value="Reptiles" description=""/>
+<valueDef value="Rodent" description=""/>
+</listOfValues>
+<ownDataTypeParameters>50,,</ownDataTypeParameters>
+</Attribute>
+</attributes>
+<identifiers itemClass="oracle.dbtools.crest.model.design.logical.CandidateKey">
+<identifier id="A58F3AB2-2B20-23F0-8BC7-AF595302B033" name="Animal_Type PK">
+<createdBy>student</createdBy>
+<createdTime>2022-11-04 10:22:13 UTC</createdTime>
+<ownerDesignName>ZOO_DM</ownerDesignName>
+<shouldEngineer>false</shouldEngineer>
+<engineerTo>
+<item key="36A68C80-3A7C-9C3A-0F1F-D6FD2EC2FACD" value="false"/>
+</engineerTo>
+<pk>true</pk>
+<usedAttributes>
+<attributeRef>62166999-A768-AD9B-47D3-3AF38468C38B</attributeRef>
+</usedAttributes>
+</identifier>
+<identifier id="ED760C8A-31B7-20CA-6804-29F0E3EEB812" name="AnimalType_TypeAnimal_uk">
+<createdBy>Larisa</createdBy>
+<createdTime>2022-11-08 20:12:27 UTC</createdTime>
+<ownerDesignName>ZOO_DM</ownerDesignName>
+<shouldEngineer>false</shouldEngineer>
+<engineerTo>
+<item key="36A68C80-3A7C-9C3A-0F1F-D6FD2EC2FACD" value="false"/>
+</engineerTo>
+<newElementsIDs>94EBE8CB-A471-F3CE-AB8E-3C4A1695F932</newElementsIDs>
+<usedAttributes>
+<attributeRef>94EBE8CB-A471-F3CE-AB8E-3C4A1695F932</attributeRef>
+</usedAttributes>
+</identifier>
+</identifiers>
+</Entity>

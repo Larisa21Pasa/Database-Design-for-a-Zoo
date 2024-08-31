@@ -1,0 +1,79 @@
+<?xml version = '1.0' encoding = 'UTF-8'?>
+<Entity class="oracle.dbtools.crest.model.design.logical.Entity" directorySegmentName="seg_0" id="6BD63C2C-54A4-8150-076D-16E10264CB06" name="Food">
+<createdBy>Larisa</createdBy>
+<createdTime>2022-11-08 17:29:30 UTC</createdTime>
+<comment><![CDATA[food actually contains types of food available for animals]]></comment>
+<commentInRDBMS><![CDATA[food actually contains types of food available for animals]]></commentInRDBMS>
+<ownerDesignName>ZOO_DM</ownerDesignName>
+<engineerTo>
+<item key="36A68C80-3A7C-9C3A-0F1F-D6FD2EC2FACD" value="true"/>
+</engineerTo>
+<adequatelyNormalized>NO</adequatelyNormalized>
+<expectedVolumes>0</expectedVolumes>
+<fwdEngineeringStrategyName>Single Table</fwdEngineeringStrategyName>
+<growthPercent>0</growthPercent>
+<growthType>Year</growthType>
+<maxVolumes>9999999</maxVolumes>
+<minVolumes>0</minVolumes>
+<normalForm>Third</normalForm>
+<attributes itemClass="oracle.dbtools.crest.model.design.logical.Attribute">
+<Attribute name="ID_Food" id="9EE9C165-E421-09C4-30D5-D4B6BDC7777A">
+<createdBy>Larisa</createdBy>
+<createdTime>2022-11-08 17:29:36 UTC</createdTime>
+<ownerDesignName>ZOO_DM</ownerDesignName>
+<engineerTo>
+<item key="36A68C80-3A7C-9C3A-0F1F-D6FD2EC2FACD" value="true"/>
+</engineerTo>
+<useDomainConstraints>false</useDomainConstraints>
+<use>1</use>
+<logicalDatatype>LOGDT019</logicalDatatype>
+<dataTypePrecision>5</dataTypePrecision>
+<ownDataTypeParameters>,5,</ownDataTypeParameters>
+</Attribute>
+<Attribute name="Food_Type" id="656E7282-EA6C-8151-59AC-5C34411E49CC">
+<createdBy>Larisa</createdBy>
+<createdTime>2022-11-08 17:29:47 UTC</createdTime>
+<ownerDesignName>ZOO_DM</ownerDesignName>
+<engineerTo>
+<item key="36A68C80-3A7C-9C3A-0F1F-D6FD2EC2FACD" value="true"/>
+</engineerTo>
+<constraintName>Food_Food_Type_ck</constraintName>
+<useDomainConstraints>false</useDomainConstraints>
+<use>1</use>
+<logicalDatatype>LOGDT024</logicalDatatype>
+<dataTypeSize>50</dataTypeSize>
+<checkConstraint>
+<implementationDef dbType="Generic Constraint" definition="regexp_like(Food_Type, &apos;^[a-zA-Z_ ]*$&apos; )"/>
+</checkConstraint>
+<ownDataTypeParameters>50,,</ownDataTypeParameters>
+</Attribute>
+<Attribute name="Quantity_wk_food" id="E13FF118-2EDA-5C40-854F-0A01E57239E5">
+<createdBy>adim</createdBy>
+<createdTime>2024-04-22 15:47:10 UTC</createdTime>
+<ownerDesignName>ZOO_DM</ownerDesignName>
+<engineerTo>
+<item key="36A68C80-3A7C-9C3A-0F1F-D6FD2EC2FACD" value="true"/>
+</engineerTo>
+<useDomainConstraints>false</useDomainConstraints>
+<use>1</use>
+<logicalDatatype>LOGDT019</logicalDatatype>
+<dataTypePrecision>5</dataTypePrecision>
+<ownDataTypeParameters>,5,</ownDataTypeParameters>
+</Attribute>
+</attributes>
+<identifiers itemClass="oracle.dbtools.crest.model.design.logical.CandidateKey">
+<identifier id="77601F8D-D17C-CE80-7129-909EB4CB5985" name="Food PK">
+<createdBy>Larisa</createdBy>
+<createdTime>2022-11-08 17:29:41 UTC</createdTime>
+<ownerDesignName>ZOO_DM</ownerDesignName>
+<shouldEngineer>false</shouldEngineer>
+<engineerTo>
+<item key="36A68C80-3A7C-9C3A-0F1F-D6FD2EC2FACD" value="false"/>
+</engineerTo>
+<pk>true</pk>
+<usedAttributes>
+<attributeRef>9EE9C165-E421-09C4-30D5-D4B6BDC7777A</attributeRef>
+</usedAttributes>
+</identifier>
+</identifiers>
+</Entity>

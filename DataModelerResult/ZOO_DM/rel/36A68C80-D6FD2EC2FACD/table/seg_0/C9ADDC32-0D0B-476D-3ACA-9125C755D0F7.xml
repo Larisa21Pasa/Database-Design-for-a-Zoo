@@ -1,0 +1,68 @@
+<?xml version = '1.0' encoding = 'UTF-8'?>
+<Table class="oracle.dbtools.crest.model.design.relational.Table" directorySegmentName="seg_0" id="C9ADDC32-0D0B-476D-3ACA-9125C755D0F7" name="Animal_Pen">
+<createdBy>llari</createdBy>
+<createdTime>2022-12-12 19:03:49 UTC</createdTime>
+<comment><![CDATA[records of places where animals live]]></comment>
+<commentInRDBMS><![CDATA[records of places where animals live]]></commentInRDBMS>
+<generatorID>0055680F-6F38-FFD2-9296-653BE6AB1144</generatorID>
+<ownerDesignName>ZOO_DM</ownerDesignName>
+<allowColumnReorder>false</allowColumnReorder>
+<existDependencyGenerateInDDl>true</existDependencyGenerateInDDl>
+<parsed>true</parsed>
+<columns itemClass="oracle.dbtools.crest.model.design.relational.Column">
+<Column name="ID_Animal_Pen" id="B063C88F-D58E-99D8-D41C-EDAF3F76BE43">
+<createdBy>llari</createdBy>
+<createdTime>2022-12-12 19:03:49 UTC</createdTime>
+<generatorID>5610980B-DA69-1FC0-856E-8BD49465493E</generatorID>
+<ownerDesignName>ZOO_DM</ownerDesignName>
+<useDomainConstraints>false</useDomainConstraints>
+<use>1</use>
+<logicalDatatype>LOGDT019</logicalDatatype>
+<dataTypePrecision>2</dataTypePrecision>
+<ownDataTypeParameters>,2,</ownDataTypeParameters>
+<autoIncrementColumn>true</autoIncrementColumn>
+<autoIncrementCycle>false</autoIncrementCycle>
+</Column>
+<Column name="Name_Pen" id="2267E4B9-CB95-71BD-710E-2DA2B1CA6A8D">
+<createdBy>llari</createdBy>
+<createdTime>2022-12-12 19:03:49 UTC</createdTime>
+<generatorID>F92E0AE7-F960-73D1-078A-AE3D4C00CAD8</generatorID>
+<ownerDesignName>ZOO_DM</ownerDesignName>
+<constraintName>Animal_Pen_Name_Pen_ck</constraintName>
+<useDomainConstraints>false</useDomainConstraints>
+<use>1</use>
+<logicalDatatype>LOGDT024</logicalDatatype>
+<dataTypeSize>50</dataTypeSize>
+<checkConstraint>
+<implementationDef dbType="Generic Constraint" definition="regexp_like(Name_Pen,  &apos;^[a-zA-Z_ ]*$&apos;)"/>
+</checkConstraint>
+<ownDataTypeParameters>50,,</ownDataTypeParameters>
+<autoIncrementCycle>false</autoIncrementCycle>
+</Column>
+</columns>
+<indexes itemClass="oracle.dbtools.crest.model.design.relational.Index">
+<ind_PK_UK id="993F1741-A567-7AAE-B5E5-6D10A51DA2B7" name="Animal_Pen_PK">
+<createdBy>llari</createdBy>
+<createdTime>2022-12-12 19:03:49 UTC</createdTime>
+<generatorID>9D43D775-F3E3-B3C2-4926-9515D12E4C8A</generatorID>
+<ownerDesignName>ZOO_DM</ownerDesignName>
+<pk>true</pk>
+<indexState>Primary Constraint</indexState>
+<isSurrogateKey>false</isSurrogateKey>
+<indexColumnUsage>
+<colUsage columnID="B063C88F-D58E-99D8-D41C-EDAF3F76BE43"/>
+</indexColumnUsage>
+</ind_PK_UK>
+<ind_PK_UK id="5A37BFBE-EA39-82B2-7FB0-9E99D044B714" name="Animal_Pen_Name_Pen_uk">
+<createdBy>llari</createdBy>
+<createdTime>2022-12-12 19:03:49 UTC</createdTime>
+<generatorID>9EDA26B5-1BBF-7B06-E50D-C40F71DA7CA3</generatorID>
+<ownerDesignName>ZOO_DM</ownerDesignName>
+<indexState>Unique Constraint</indexState>
+<isSurrogateKey>false</isSurrogateKey>
+<indexColumnUsage>
+<colUsage columnID="2267E4B9-CB95-71BD-710E-2DA2B1CA6A8D"/>
+</indexColumnUsage>
+</ind_PK_UK>
+</indexes>
+</Table>

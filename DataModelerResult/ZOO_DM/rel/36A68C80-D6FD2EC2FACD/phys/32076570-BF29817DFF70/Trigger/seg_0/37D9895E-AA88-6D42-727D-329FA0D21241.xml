@@ -1,0 +1,14 @@
+<?xml version = '1.0' encoding = 'UTF-8'?>
+<TriggerOraclev10g class="oracle.dbtools.crest.model.design.storage.oracle.v10g.TriggerOraclev10g" name="animal_info_gender_check_trg" directorySegmentName="seg_0" id="37D9895E-AA88-6D42-727D-329FA0D21241">
+<createdBy>adim</createdBy>
+<createdTime>2024-04-24 19:40:51 UTC</createdTime>
+<ownerDesignName>ZOO_DM</ownerDesignName>
+<actions>INSERT, UPDATE</actions>
+<body><![CDATA[BEGIN
+    IF UPPER(:new.gender) NOT IN ('MALE', 'FEMALE') THEN
+        RAISE_APPLICATION_ERROR(-20003, 'Gender-ul trebuie să fie "Male" sau "Female".');
+    END IF;
+END;]]></body>
+<triggerTime>BEFORE</triggerTime>
+<table>B97C0872-97FC-4DDE-D7D1-C06726A8D5BB</table>
+</TriggerOraclev10g>

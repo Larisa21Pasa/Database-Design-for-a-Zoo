@@ -1,0 +1,8 @@
+<?xml version = '1.0' encoding = 'UTF-8'?>
+<OSDM_Design class="oracle.dbtools.crest.model.design.Design" name="ZOO_DM" id="8988512A-ABF4-235E-1150-9AEC71C4AA6A" version="3.5">
+<createdBy>student</createdBy>
+<createdTime>2022-11-04 10:00:35 UTC</createdTime>
+<ownerDesignName>datamodeler_proiect_pl</ownerDesignName>
+<capitalNames>false</capitalNames>
+<designId>8988512A-ABF4-235E-1150-9AEC71C4AA6A</designId>
+</OSDM_Design>

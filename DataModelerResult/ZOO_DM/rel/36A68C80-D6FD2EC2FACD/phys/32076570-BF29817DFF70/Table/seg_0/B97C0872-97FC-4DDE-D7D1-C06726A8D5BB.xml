@@ -1,0 +1,48 @@
+<?xml version = '1.0' encoding = 'UTF-8'?>
+<TableProxyOraclev11g class="oracle.dbtools.crest.model.design.storage.oracle.v11g.TableProxyOraclev11g" name="Animal_Info" directorySegmentName="seg_0" id="B97C0872-97FC-4DDE-D7D1-C06726A8D5BB">
+<createdBy>adim</createdBy>
+<createdTime>2024-04-22 16:01:12 UTC</createdTime>
+<ownerDesignName>ZOO_DM</ownerDesignName>
+<logging>YES</logging>
+<partitionedRowMovement>DISABLE</partitionedRowMovement>
+<temporaryChanged>false</temporaryChanged>
+<accessDriverType>oracle_loader</accessDriverType>
+<rejectLimit></rejectLimit>
+<columnProxies itemClass="oracle.dbtools.crest.model.design.storage.oracle.v12c.ColumnProxyOraclev12c">
+<ColumnProxy name="Gender" id="270DEB01-893B-D7D5-9104-02A533CC1269">
+<createdBy>adim</createdBy>
+<createdTime>2024-04-22 16:01:12 UTC</createdTime>
+<ownerDesignName>ZOO_DM</ownerDesignName>
+</ColumnProxy>
+<ColumnProxy name="Birth_Date" id="4FBAE1AB-7F93-1E41-240D-29BC7C67B03A">
+<createdBy>adim</createdBy>
+<createdTime>2024-04-22 16:01:12 UTC</createdTime>
+<ownerDesignName>ZOO_DM</ownerDesignName>
+</ColumnProxy>
+<ColumnProxy name="ID_Animals" id="57F8AFDF-F7B8-F48F-03B2-F02B8715723D">
+<createdBy>adim</createdBy>
+<createdTime>2024-04-22 16:01:12 UTC</createdTime>
+<ownerDesignName>ZOO_DM</ownerDesignName>
+</ColumnProxy>
+<ColumnProxy name="Name" id="91674E8C-EAA6-004B-2345-5E48C70DC53C">
+<createdBy>adim</createdBy>
+<createdTime>2024-04-22 16:01:12 UTC</createdTime>
+<ownerDesignName>ZOO_DM</ownerDesignName>
+</ColumnProxy>
+</columnProxies>
+<foreignKeys>
+<ForeignKey class="oracle.dbtools.crest.model.design.storage.oracle.v10g.FKProxyOraclev10g" name="Animals_Animal_Info" id="9AE7962F-53B1-F69E-6C44-6B3BB1269D47">
+<createdBy>adim</createdBy>
+<createdTime>2024-04-22 16:01:12 UTC</createdTime>
+<ownerDesignName>ZOO_DM</ownerDesignName>
+</ForeignKey>
+</foreignKeys>
+<primaryKeys>
+<PrimaryKey class="oracle.dbtools.crest.model.design.storage.oracle.v10g.PKProxyOraclev10g" name="Animals_ID_Animals_uk" id="105D4ABA-9812-CEAB-387B-C09BEB9A0ED1">
+<createdBy>adim</createdBy>
+<createdTime>2024-04-22 16:01:12 UTC</createdTime>
+<ownerDesignName>ZOO_DM</ownerDesignName>
+<indexSort>SORTED</indexSort>
+</PrimaryKey>
+</primaryKeys>
+</TableProxyOraclev11g>

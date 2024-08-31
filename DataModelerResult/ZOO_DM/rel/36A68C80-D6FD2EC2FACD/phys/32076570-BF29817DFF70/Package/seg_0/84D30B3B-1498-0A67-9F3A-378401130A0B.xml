@@ -1,0 +1,203 @@
+<?xml version = '1.0' encoding = 'UTF-8'?>
+<PackageOracle class="oracle.dbtools.crest.model.design.storage.oracle.PackageOracle" name="food_package" directorySegmentName="seg_0" id="84D30B3B-1498-0A67-9F3A-378401130A0B">
+<createdBy>adim</createdBy>
+<createdTime>2024-04-25 16:12:24 UTC</createdTime>
+<ownerDesignName>ZOO_DM</ownerDesignName>
+<source>CREATE OR REPLACE PACKAGE food_package AS
+    PROCEDURE add_food (
+        p_food_type    IN food.food_type%TYPE,
+        p_quantity_wk_food   IN food.quantity_wk_food%TYPE
+    );
+
+    PROCEDURE delete_food (
+        p_id_food IN food.id_food%TYPE
+    );
+
+    PROCEDURE update_food (
+        p_id_food IN food.id_food%TYPE,
+        p_choice    IN VARCHAR2,
+        p_updated   IN VARCHAR2
+    );
+
+    PROCEDURE display_food;
+END food_package;
+/
+
+CREATE OR REPLACE PACKAGE BODY food_package AS
+
+    PROCEDURE add_food (
+        p_food_type           IN food.food_type%TYPE,
+        p_quantity_wk_food    IN food.quantity_wk_food%TYPE
+    ) IS
+        v_count NUMBER;
+    BEGIN
+        SAVEPOINT savepoint_add_food;
+        
+        BEGIN
+            IF p_food_type IS NULL 
+            OR p_quantity_wk_food IS NULL THEN
+                RAISE_APPLICATION_ERROR(-20001, &apos;All fields must be provided.&apos;);
+            END IF;
+    
+            SELECT COUNT(*)
+            INTO   v_count
+            FROM   food
+            WHERE  food_type = p_food_type;
+    
+            IF v_count &gt; 0 THEN
+                RAISE_APPLICATION_ERROR(-21002, &apos;Food with the same id already exists.&apos;);
+            END IF;
+
+            INSERT INTO food (
+                food_type,
+                quantity_wk_food
+            ) VALUES (
+                p_food_type,
+                p_quantity_wk_food
+            );
+    
+            COMMIT;
+        
+        EXCEPTION
+            WHEN dup_val_on_index THEN
+                ROLLBACK TO savepoint_add_food;
+                RAISE_APPLICATION_ERROR(-20001, &apos;Food with the same id already exists.&apos;);
+                
+            WHEN OTHERS THEN
+                ROLLBACK TO savepoint_add_food;
+                RAISE_APPLICATION_ERROR(-20002, &apos;Error when trying to add food to db &apos; || SQLERRM);
+        END;
+    END add_food;
+    
+    
+    PROCEDURE delete_food (
+        p_id_food IN food.id_food%TYPE
+    ) IS
+        v_count NUMBER;
+    BEGIN
+        SAVEPOINT savepoint_delete_food;
+
+        BEGIN
+            -- CHECK IF ID IS VALID
+            IF p_id_food IS NULL OR p_id_food = &apos;&apos; THEN
+                RAISE_APPLICATION_ERROR(-20003, &apos;ID food must not be empty.&apos;);
+            END IF;
+                
+            --CHECK FOR FOOD ID IN CENTRAL TABEL -&gt; MUST EXISTS
+            SELECT COUNT(*)
+            INTO v_count
+            FROM food
+            WHERE id_food = p_id_food;
+            
+            IF v_count = 0 THEN
+                RAISE_APPLICATION_ERROR(-20004, &apos;You are trying to delete an invalid food ID.&apos;);
+            END IF;
+            
+            -- CHECK IF EXISTS IN DIET
+            SELECT COUNT(*)
+            INTO v_count
+            FROM diet
+            WHERE id_food = p_id_food;
+
+            IF v_count &gt; 0 THEN
+                -- DELETE FROM DIET AND CHECK FOR SUCCESS DELETE
+                DELETE FROM diet
+                WHERE  id_food = p_id_food;
+                
+                IF SQL%NOTFOUND THEN
+                    RAISE_APPLICATION_ERROR(-20017, &apos;Error deleting from diet.&apos;);
+                END IF;
+            END IF;
+            
+            -- PROPER DELETE OF FOOD 
+            DELETE FROM food WHERE id_food = p_id_food;
+            
+            -- CHECK FOR SUCCESSFUL DELETE OPERATION
+            IF SQL%NOTFOUND THEN
+                ROLLBACK TO delete_animal_savepoint;
+                RAISE_APPLICATION_ERROR(-20005, &apos;FOOD with ID &apos; || p_id_food || &apos; has not been deleted.&apos;);
+            END IF;
+            
+            COMMIT;
+
+        EXCEPTION
+            WHEN OTHERS THEN
+                ROLLBACK TO savepoint_delete_food;
+                RAISE_APPLICATION_ERROR(-21009, &apos;Error when trying to delete food from db &apos; || SQLERRM);
+        END;
+
+    END delete_food;
+
+
+    PROCEDURE update_food (
+        p_id_food  IN food.id_food%TYPE,
+        p_choice    IN VARCHAR2,
+        p_updated   IN VARCHAR2
+    ) IS
+        e_no_rows        EXCEPTION;
+        e_bad_choice     EXCEPTION;
+        v_count NUMBER;
+    BEGIN
+        SAVEPOINT savepoint_update_food;
+
+        BEGIN
+            IF p_choice = &apos;food_type&apos; THEN
+                IF p_updated IS NULL THEN
+                      RAISE_APPLICATION_ERROR(-20010, &apos;New value must not be null.&apos;);
+                END IF;
+                
+                UPDATE food 
+                SET food_type = p_updated 
+                WHERE id_food = p_id_food;
+                
+                IF SQL%NOTFOUND THEN
+                    RAISE e_no_rows;
+                END IF;
+                
+            ELSIF p_choice = &apos;quantity_wk_food&apos; THEN
+                IF p_updated IS NULL THEN
+                      RAISE_APPLICATION_ERROR(-20010, &apos;New value must not be null.&apos;);
+                END IF;
+                
+                UPDATE food
+                SET quantity_wk_food = TO_NUMBER(p_updated) 
+                WHERE id_food = p_id_food;
+                
+                IF SQL%NOTFOUND THEN
+                    RAISE e_no_rows;
+                END IF;
+                
+            ELSE
+                RAISE e_bad_choice;
+            END IF;
+
+            COMMIT;
+
+        EXCEPTION
+            WHEN e_bad_choice THEN
+                RAISE_APPLICATION_ERROR(-20201,  &apos;No attribute like &apos;||p_choice||&apos; found !&apos;);
+            WHEN e_no_rows THEN
+                RAISE_APPLICATION_ERROR(-20201, &apos;Food with id &apos; || p_id_food || &apos; does not exists.&apos;);
+                
+            WHEN OTHERS THEN
+                ROLLBACK TO savepoint_update_food;
+                RAISE_APPLICATION_ERROR(-21012, &apos;Error when trying to update food in db &apos; || SQLERRM);
+        END;
+
+    END update_food;
+    
+    PROCEDURE display_food AS
+    BEGIN
+        FOR rec IN (SELECT *
+                    FROM food f
+                    ORDER BY f.id_food)
+        LOOP
+            DBMS_OUTPUT.PUT_LINE(&apos;Food ID: &apos; || rec.id_food);
+            DBMS_OUTPUT.PUT_LINE(&apos;Food Type: &apos; || rec.food_type);
+            DBMS_OUTPUT.PUT_LINE(&apos;Quantity per Week: &apos; || rec.quantity_wk_food);
+            DBMS_OUTPUT.PUT_LINE(&apos;-------------------------&apos;);
+        END LOOP;
+    END display_food;
+    
+END food_package;</source>
+</PackageOracle>

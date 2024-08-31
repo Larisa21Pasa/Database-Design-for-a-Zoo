@@ -1,0 +1,79 @@
+<?xml version = '1.0' encoding = 'UTF-8'?>
+<Entity class="oracle.dbtools.crest.model.design.logical.Entity" directorySegmentName="seg_0" id="0055680F-6F38-FFD2-9296-653BE6AB1144" name="Animal_Pen">
+<createdBy>student</createdBy>
+<createdTime>2022-11-04 10:26:38 UTC</createdTime>
+<comment><![CDATA[records of places where animals live]]></comment>
+<commentInRDBMS><![CDATA[records of places where animals live]]></commentInRDBMS>
+<ownerDesignName>ZOO_DM</ownerDesignName>
+<engineerTo>
+<item key="36A68C80-3A7C-9C3A-0F1F-D6FD2EC2FACD" value="true"/>
+</engineerTo>
+<adequatelyNormalized>NO</adequatelyNormalized>
+<expectedVolumes>0</expectedVolumes>
+<fwdEngineeringStrategyName>Single Table</fwdEngineeringStrategyName>
+<growthPercent>0</growthPercent>
+<growthType>Year</growthType>
+<maxVolumes>9999999</maxVolumes>
+<minVolumes>0</minVolumes>
+<normalForm>Third</normalForm>
+<attributes itemClass="oracle.dbtools.crest.model.design.logical.Attribute">
+<Attribute name="ID_Animal_Pen" id="5610980B-DA69-1FC0-856E-8BD49465493E">
+<createdBy>student</createdBy>
+<createdTime>2022-11-04 10:26:51 UTC</createdTime>
+<ownerDesignName>ZOO_DM</ownerDesignName>
+<engineerTo>
+<item key="36A68C80-3A7C-9C3A-0F1F-D6FD2EC2FACD" value="true"/>
+</engineerTo>
+<useDomainConstraints>false</useDomainConstraints>
+<use>1</use>
+<logicalDatatype>LOGDT019</logicalDatatype>
+<dataTypePrecision>2</dataTypePrecision>
+<ownDataTypeParameters>,2,</ownDataTypeParameters>
+</Attribute>
+<Attribute name="Name_Pen" id="F92E0AE7-F960-73D1-078A-AE3D4C00CAD8">
+<createdBy>student</createdBy>
+<createdTime>2022-11-04 10:27:09 UTC</createdTime>
+<ownerDesignName>ZOO_DM</ownerDesignName>
+<engineerTo>
+<item key="36A68C80-3A7C-9C3A-0F1F-D6FD2EC2FACD" value="true"/>
+</engineerTo>
+<constraintName>Animal_Pen_Name_Pen_ck</constraintName>
+<useDomainConstraints>false</useDomainConstraints>
+<use>1</use>
+<logicalDatatype>LOGDT024</logicalDatatype>
+<dataTypeSize>50</dataTypeSize>
+<checkConstraint>
+<implementationDef dbType="Generic Constraint" definition="regexp_like(Name_Pen,  &apos;^[a-zA-Z_ ]*$&apos;)"/>
+</checkConstraint>
+<ownDataTypeParameters>50,,</ownDataTypeParameters>
+</Attribute>
+</attributes>
+<identifiers itemClass="oracle.dbtools.crest.model.design.logical.CandidateKey">
+<identifier id="9D43D775-F3E3-B3C2-4926-9515D12E4C8A" name="Animal_Pen PK">
+<createdBy>student</createdBy>
+<createdTime>2022-11-04 10:27:07 UTC</createdTime>
+<ownerDesignName>ZOO_DM</ownerDesignName>
+<shouldEngineer>false</shouldEngineer>
+<engineerTo>
+<item key="36A68C80-3A7C-9C3A-0F1F-D6FD2EC2FACD" value="false"/>
+</engineerTo>
+<pk>true</pk>
+<usedAttributes>
+<attributeRef>5610980B-DA69-1FC0-856E-8BD49465493E</attributeRef>
+</usedAttributes>
+</identifier>
+<identifier id="9EDA26B5-1BBF-7B06-E50D-C40F71DA7CA3" name="Animal_Pen_Name_Pen_uk">
+<createdBy>Larisa</createdBy>
+<createdTime>2022-11-08 20:10:40 UTC</createdTime>
+<ownerDesignName>ZOO_DM</ownerDesignName>
+<shouldEngineer>false</shouldEngineer>
+<engineerTo>
+<item key="36A68C80-3A7C-9C3A-0F1F-D6FD2EC2FACD" value="false"/>
+</engineerTo>
+<newElementsIDs>F92E0AE7-F960-73D1-078A-AE3D4C00CAD8</newElementsIDs>
+<usedAttributes>
+<attributeRef>F92E0AE7-F960-73D1-078A-AE3D4C00CAD8</attributeRef>
+</usedAttributes>
+</identifier>
+</identifiers>
+</Entity>

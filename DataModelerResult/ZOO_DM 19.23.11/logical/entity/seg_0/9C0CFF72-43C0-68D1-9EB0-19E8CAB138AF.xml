@@ -1,0 +1,117 @@
+<?xml version = '1.0' encoding = 'UTF-8'?>
+<Entity class="oracle.dbtools.crest.model.design.logical.Entity" directorySegmentName="seg_0" id="9C0CFF72-43C0-68D1-9EB0-19E8CAB138AF" name="Diet">
+<createdBy>Larisa</createdBy>
+<createdTime>2022-11-08 17:30:09 UTC</createdTime>
+<comment><![CDATA[diet contains type of food and for what animal is it suitable for]]></comment>
+<commentInRDBMS><![CDATA[diet contains type of food and for what animal is it suitable for]]></commentInRDBMS>
+<ownerDesignName>ZOO_DM</ownerDesignName>
+<engineerTo>
+<item key="36A68C80-3A7C-9C3A-0F1F-D6FD2EC2FACD" value="true"/>
+</engineerTo>
+<adequatelyNormalized>NO</adequatelyNormalized>
+<expectedVolumes>0</expectedVolumes>
+<fwdEngineeringStrategyName>Single Table</fwdEngineeringStrategyName>
+<growthPercent>0</growthPercent>
+<growthType>Year</growthType>
+<maxVolumes>9999999</maxVolumes>
+<minVolumes>0</minVolumes>
+<normalForm>Third</normalForm>
+<attributes itemClass="oracle.dbtools.crest.model.design.logical.Attribute">
+<Attribute name="ID_Diet" id="C6D36837-44A3-F38A-2B30-01EAAA2DE4FA">
+<createdBy>Larisa</createdBy>
+<createdTime>2022-11-08 17:30:36 UTC</createdTime>
+<ownerDesignName>ZOO_DM</ownerDesignName>
+<engineerTo>
+<item key="36A68C80-3A7C-9C3A-0F1F-D6FD2EC2FACD" value="true"/>
+</engineerTo>
+<useDomainConstraints>false</useDomainConstraints>
+<use>1</use>
+<logicalDatatype>LOGDT019</logicalDatatype>
+<dataTypePrecision>5</dataTypePrecision>
+<ownDataTypeParameters>,5,</ownDataTypeParameters>
+</Attribute>
+<Attribute name="ID_Food" id="A631B0EB-AE12-CE47-AD64-AAE67F0B6836">
+<createdBy>Larisa</createdBy>
+<createdTime>2022-11-08 18:39:07 UTC</createdTime>
+<generatorID>4777CC5E-4CE6-A258-A2B8-5633936DC973</generatorID>
+<ownerDesignName>ZOO_DM</ownerDesignName>
+<engineerTo>
+<item key="36A68C80-3A7C-9C3A-0F1F-D6FD2EC2FACD" value="true"/>
+</engineerTo>
+<referedAttribute>9EE9C165-E421-09C4-30D5-D4B6BDC7777A</referedAttribute>
+<useDomainConstraints>false</useDomainConstraints>
+<use>1</use>
+<logicalDatatype>LOGDT019</logicalDatatype>
+<dataTypePrecision>2</dataTypePrecision>
+<ownDataTypeParameters>,2,</ownDataTypeParameters>
+</Attribute>
+<Attribute name="ID_Animals" id="E3D24053-E8DA-6491-8B04-823B350C7E85">
+<createdBy>Larisa</createdBy>
+<createdTime>2022-11-08 18:40:23 UTC</createdTime>
+<generatorID>962C2DDB-6521-8F1B-9836-0CC28A404D7F</generatorID>
+<ownerDesignName>ZOO_DM</ownerDesignName>
+<engineerTo>
+<item key="36A68C80-3A7C-9C3A-0F1F-D6FD2EC2FACD" value="true"/>
+</engineerTo>
+<referedAttribute>9E9D6FDB-3020-EF7A-FE07-EC33A60D525E</referedAttribute>
+<useDomainConstraints>false</useDomainConstraints>
+<use>1</use>
+<logicalDatatype>LOGDT019</logicalDatatype>
+<dataTypePrecision>3</dataTypePrecision>
+<ownDataTypeParameters>,3,</ownDataTypeParameters>
+</Attribute>
+<Attribute name="Diet_Type" id="B2577942-04D3-45EA-0280-3A0D5397D670">
+<createdBy>Larisa</createdBy>
+<createdTime>2022-11-08 17:30:47 UTC</createdTime>
+<ownerDesignName>ZOO_DM</ownerDesignName>
+<engineerTo>
+<item key="36A68C80-3A7C-9C3A-0F1F-D6FD2EC2FACD" value="true"/>
+</engineerTo>
+<constraintName>Check_Diet_Type</constraintName>
+<useDomainConstraints>false</useDomainConstraints>
+<use>1</use>
+<logicalDatatype>LOGDT024</logicalDatatype>
+<dataTypeSize>20</dataTypeSize>
+<listOfValues>
+<valueDef value="Carnivor" description=""/>
+<valueDef value="Erbivor" description=""/>
+<valueDef value="Omnivor" description=""/>
+</listOfValues>
+<ownDataTypeParameters>20,,</ownDataTypeParameters>
+</Attribute>
+<Attribute name="Quantity" id="71589F37-EBF4-94BF-9CEB-44E47F147244">
+<createdBy>Larisa</createdBy>
+<createdTime>2022-11-08 17:31:35 UTC</createdTime>
+<ownerDesignName>ZOO_DM</ownerDesignName>
+<engineerTo>
+<item key="36A68C80-3A7C-9C3A-0F1F-D6FD2EC2FACD" value="true"/>
+</engineerTo>
+<constraintName>Diet_Cantity_ck</constraintName>
+<useDomainConstraints>false</useDomainConstraints>
+<use>1</use>
+<logicalDatatype>LOGDT019</logicalDatatype>
+<dataTypePrecision>2</dataTypePrecision>
+<checkConstraint>
+<implementationDef dbType="Generic Constraint" definition="regexp_like(Cantity, &apos;[+-]?([0-9]*[.])?[0-9]+&apos;)"/>
+</checkConstraint>
+<ownDataTypeParameters>,2,</ownDataTypeParameters>
+</Attribute>
+</attributes>
+<identifiers itemClass="oracle.dbtools.crest.model.design.logical.CandidateKey">
+<identifier id="ED964D76-60EE-96DD-C31F-2BE6CC08D3A0" name="Diet PK">
+<createdBy>Larisa</createdBy>
+<createdTime>2022-11-08 17:30:46 UTC</createdTime>
+<ownerDesignName>ZOO_DM</ownerDesignName>
+<shouldEngineer>false</shouldEngineer>
+<engineerTo>
+<item key="36A68C80-3A7C-9C3A-0F1F-D6FD2EC2FACD" value="false"/>
+</engineerTo>
+<pk>true</pk>
+<usedAttributes>
+<attributeRef>C6D36837-44A3-F38A-2B30-01EAAA2DE4FA</attributeRef>
+<attributeRef>A631B0EB-AE12-CE47-AD64-AAE67F0B6836</attributeRef>
+<attributeRef>E3D24053-E8DA-6491-8B04-823B350C7E85</attributeRef>
+</usedAttributes>
+</identifier>
+</identifiers>
+</Entity>

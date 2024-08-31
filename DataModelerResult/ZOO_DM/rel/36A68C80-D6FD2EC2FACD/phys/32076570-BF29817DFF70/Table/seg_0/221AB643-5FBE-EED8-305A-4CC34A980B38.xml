@@ -1,0 +1,39 @@
+<?xml version = '1.0' encoding = 'UTF-8'?>
+<TableProxyOraclev11g class="oracle.dbtools.crest.model.design.storage.oracle.v11g.TableProxyOraclev11g" name="Animal_Type" directorySegmentName="seg_0" id="221AB643-5FBE-EED8-305A-4CC34A980B38">
+<createdBy>adim</createdBy>
+<createdTime>2024-04-22 16:01:12 UTC</createdTime>
+<ownerDesignName>ZOO_DM</ownerDesignName>
+<logging>YES</logging>
+<partitionedRowMovement>DISABLE</partitionedRowMovement>
+<temporaryChanged>false</temporaryChanged>
+<accessDriverType>oracle_loader</accessDriverType>
+<rejectLimit></rejectLimit>
+<columnProxies itemClass="oracle.dbtools.crest.model.design.storage.oracle.v12c.ColumnProxyOraclev12c">
+<ColumnProxy name="Type_animal" id="4953735C-4101-69DA-06C4-D420205F6EEB">
+<createdBy>adim</createdBy>
+<createdTime>2024-04-22 16:01:12 UTC</createdTime>
+<ownerDesignName>ZOO_DM</ownerDesignName>
+</ColumnProxy>
+<ColumnProxy name="ID_Animal_Type" id="A1EABB6A-032F-1758-90C4-D8D44FB5E186">
+<createdBy>adim</createdBy>
+<createdTime>2024-04-22 16:01:12 UTC</createdTime>
+<ownerDesignName>ZOO_DM</ownerDesignName>
+</ColumnProxy>
+</columnProxies>
+<primaryKeys>
+<PrimaryKey class="oracle.dbtools.crest.model.design.storage.oracle.v10g.PKProxyOraclev10g" name="Animal_Type_PK" id="29FB784D-0FE3-6AF3-BF5D-5569D37838E7">
+<createdBy>adim</createdBy>
+<createdTime>2024-04-22 16:01:12 UTC</createdTime>
+<ownerDesignName>ZOO_DM</ownerDesignName>
+<indexSort>SORTED</indexSort>
+</PrimaryKey>
+</primaryKeys>
+<uniqueKeys>
+<UniqueKey class="oracle.dbtools.crest.model.design.storage.oracle.v10g.UniqueOraclev10g" name="AnimalType_TypeAnimal_uk" id="1D90BA1A-BC8B-070D-130B-FD7AAAB70BE1">
+<createdBy>adim</createdBy>
+<createdTime>2024-04-22 16:01:12 UTC</createdTime>
+<ownerDesignName>ZOO_DM</ownerDesignName>
+<indexSort>SORTED</indexSort>
+</UniqueKey>
+</uniqueKeys>
+</TableProxyOraclev11g>

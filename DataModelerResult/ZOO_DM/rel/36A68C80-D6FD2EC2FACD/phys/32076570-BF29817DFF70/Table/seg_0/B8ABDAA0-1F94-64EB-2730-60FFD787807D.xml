@@ -1,0 +1,58 @@
+<?xml version = '1.0' encoding = 'UTF-8'?>
+<TableProxyOraclev11g class="oracle.dbtools.crest.model.design.storage.oracle.v11g.TableProxyOraclev11g" name="Diet" directorySegmentName="seg_0" id="B8ABDAA0-1F94-64EB-2730-60FFD787807D">
+<createdBy>adim</createdBy>
+<createdTime>2024-04-22 16:01:12 UTC</createdTime>
+<ownerDesignName>ZOO_DM</ownerDesignName>
+<logging>YES</logging>
+<partitionedRowMovement>DISABLE</partitionedRowMovement>
+<temporaryChanged>false</temporaryChanged>
+<accessDriverType>oracle_loader</accessDriverType>
+<rejectLimit></rejectLimit>
+<columnProxies itemClass="oracle.dbtools.crest.model.design.storage.oracle.v12c.ColumnProxyOraclev12c">
+<ColumnProxy name="ID_Food" id="AE77416B-48C3-0C25-BAEB-05D2BA749050">
+<createdBy>adim</createdBy>
+<createdTime>2024-04-22 16:01:12 UTC</createdTime>
+<ownerDesignName>ZOO_DM</ownerDesignName>
+</ColumnProxy>
+<ColumnProxy name="Diet_Type" id="B894663B-A40D-FE34-47EA-9436AA5EE985">
+<createdBy>adim</createdBy>
+<createdTime>2024-04-22 16:01:12 UTC</createdTime>
+<ownerDesignName>ZOO_DM</ownerDesignName>
+</ColumnProxy>
+<ColumnProxy name="ID_Animals" id="BD8F4611-4B08-F28C-A61B-5E17367FFBCA">
+<createdBy>adim</createdBy>
+<createdTime>2024-04-22 16:01:12 UTC</createdTime>
+<ownerDesignName>ZOO_DM</ownerDesignName>
+</ColumnProxy>
+<ColumnProxy name="ID_Diet" id="D07CA8FA-7915-9183-1E1E-06B71746441F">
+<createdBy>adim</createdBy>
+<createdTime>2024-04-22 16:01:12 UTC</createdTime>
+<ownerDesignName>ZOO_DM</ownerDesignName>
+</ColumnProxy>
+<ColumnProxy name="Quantity" id="F9F3FC24-D6CB-B78A-0635-B9F8B106EE8F">
+<createdBy>adim</createdBy>
+<createdTime>2024-04-22 16:01:12 UTC</createdTime>
+<ownerDesignName>ZOO_DM</ownerDesignName>
+</ColumnProxy>
+</columnProxies>
+<foreignKeys>
+<ForeignKey class="oracle.dbtools.crest.model.design.storage.oracle.v10g.FKProxyOraclev10g" name="Animals_Diet_fk" id="341DAE05-393C-ECB8-D497-ADB53609254E">
+<createdBy>adim</createdBy>
+<createdTime>2024-04-22 16:01:12 UTC</createdTime>
+<ownerDesignName>ZOO_DM</ownerDesignName>
+</ForeignKey>
+<ForeignKey class="oracle.dbtools.crest.model.design.storage.oracle.v10g.FKProxyOraclev10g" name="Food_Diet_fk" id="68FDEA45-C547-6070-5E74-365D4708FF0E">
+<createdBy>adim</createdBy>
+<createdTime>2024-04-22 16:01:12 UTC</createdTime>
+<ownerDesignName>ZOO_DM</ownerDesignName>
+</ForeignKey>
+</foreignKeys>
+<primaryKeys>
+<PrimaryKey class="oracle.dbtools.crest.model.design.storage.oracle.v10g.PKProxyOraclev10g" name="Diet_PK" id="E671CFC2-FE3E-8598-59CB-9153B8BC17A9">
+<createdBy>adim</createdBy>
+<createdTime>2024-04-22 16:01:12 UTC</createdTime>
+<ownerDesignName>ZOO_DM</ownerDesignName>
+<indexSort>SORTED</indexSort>
+</PrimaryKey>
+</primaryKeys>
+</TableProxyOraclev11g>

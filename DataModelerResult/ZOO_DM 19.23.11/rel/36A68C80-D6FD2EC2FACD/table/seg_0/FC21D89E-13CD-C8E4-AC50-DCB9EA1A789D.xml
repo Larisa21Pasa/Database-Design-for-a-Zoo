@@ -1,0 +1,95 @@
+<?xml version = '1.0' encoding = 'UTF-8'?>
+<Table class="oracle.dbtools.crest.model.design.relational.Table" directorySegmentName="seg_0" id="FC21D89E-13CD-C8E4-AC50-DCB9EA1A789D" name="Animals">
+<createdBy>llari</createdBy>
+<createdTime>2022-12-12 19:03:49 UTC</createdTime>
+<comment><![CDATA[main tabel where it is keeped id of animal and details about animal pen where it lives]]></comment>
+<commentInRDBMS><![CDATA[main tabel where it is keeped id of animal and details about animal pen where it lives]]></commentInRDBMS>
+<generatorID>7D7A2311-EBBA-D010-41AD-1C83162840F5</generatorID>
+<ownerDesignName>ZOO_DM</ownerDesignName>
+<allowColumnReorder>false</allowColumnReorder>
+<existDependencyGenerateInDDl>true</existDependencyGenerateInDDl>
+<parsed>true</parsed>
+<columns itemClass="oracle.dbtools.crest.model.design.relational.Column">
+<Column name="ID_Animals" id="CAB44045-9F9D-619A-F524-8F9E86D19835">
+<createdBy>llari</createdBy>
+<createdTime>2022-12-12 19:03:49 UTC</createdTime>
+<generatorID>9E9D6FDB-3020-EF7A-FE07-EC33A60D525E</generatorID>
+<ownerDesignName>ZOO_DM</ownerDesignName>
+<useDomainConstraints>false</useDomainConstraints>
+<use>1</use>
+<logicalDatatype>LOGDT019</logicalDatatype>
+<dataTypePrecision>3</dataTypePrecision>
+<ownDataTypeParameters>,3,</ownDataTypeParameters>
+<autoIncrementColumn>true</autoIncrementColumn>
+<autoIncrementCycle>false</autoIncrementCycle>
+</Column>
+<Column name="ID_Animal_Type" id="A7D8DF9E-0355-262F-C292-DD4AD050D103">
+<createdBy>llari</createdBy>
+<createdTime>2022-12-12 19:03:49 UTC</createdTime>
+<generatorID>06ACC4B3-B1E9-A50D-5DA5-01E296AB427E</generatorID>
+<ownerDesignName>ZOO_DM</ownerDesignName>
+<useDomainConstraints>false</useDomainConstraints>
+<use>1</use>
+<logicalDatatype>LOGDT019</logicalDatatype>
+<dataTypePrecision>2</dataTypePrecision>
+<ownDataTypeParameters>,2,</ownDataTypeParameters>
+<previousColumn>false</previousColumn>
+<autoIncrementCycle>false</autoIncrementCycle>
+<associations>
+<colAssociation fkAssociation="538D3B9D-EA2B-D7B0-90F7-D02B5BFD7A2B" referredColumn="A1EABB6A-032F-1758-90C4-D8D44FB5E186"/>
+</associations>
+</Column>
+<Column name="ID_Animal_Pen" id="32514454-7690-ED3C-3A63-8A851996AAE8">
+<createdBy>llari</createdBy>
+<createdTime>2022-12-12 19:03:49 UTC</createdTime>
+<generatorID>511F0351-976B-309F-7E6F-C690930088E3</generatorID>
+<ownerDesignName>ZOO_DM</ownerDesignName>
+<useDomainConstraints>false</useDomainConstraints>
+<use>1</use>
+<logicalDatatype>LOGDT019</logicalDatatype>
+<dataTypePrecision>2</dataTypePrecision>
+<ownDataTypeParameters>,2,</ownDataTypeParameters>
+<previousColumn>false</previousColumn>
+<autoIncrementCycle>false</autoIncrementCycle>
+<associations>
+<colAssociation fkAssociation="0ABC5DEF-9A5D-46E6-9AB7-48AE4EEDE9E2" referredColumn="B063C88F-D58E-99D8-D41C-EDAF3F76BE43"/>
+</associations>
+</Column>
+</columns>
+<indexes itemClass="oracle.dbtools.crest.model.design.relational.Index">
+<ind_PK_UK id="EC258954-55B5-1E8D-A20F-6BFFE2B6B78A" name="Animals_PK">
+<createdBy>llari</createdBy>
+<createdTime>2022-12-12 19:03:49 UTC</createdTime>
+<generatorID>0778CB75-FF51-3512-4D60-FD34A9F8924F</generatorID>
+<ownerDesignName>ZOO_DM</ownerDesignName>
+<pk>true</pk>
+<indexState>Primary Constraint</indexState>
+<isSurrogateKey>false</isSurrogateKey>
+<indexColumnUsage>
+<colUsage columnID="CAB44045-9F9D-619A-F524-8F9E86D19835"/>
+</indexColumnUsage>
+</ind_PK_UK>
+<ind_PK_UK id="F28EBB0A-5D8F-361D-5671-277F6C3644D9" name="Animal_Pen_Animals_fk">
+<createdBy>llari</createdBy>
+<createdTime>2022-12-12 19:03:49 UTC</createdTime>
+<generatorID>13E23C37-84A1-7671-9EEB-76A3CB5AA944</generatorID>
+<ownerDesignName>ZOO_DM</ownerDesignName>
+<indexState>Foreign Key</indexState>
+<isSurrogateKey>false</isSurrogateKey>
+<indexColumnUsage>
+<colUsage columnID="32514454-7690-ED3C-3A63-8A851996AAE8"/>
+</indexColumnUsage>
+</ind_PK_UK>
+<ind_PK_UK id="7892E812-32F9-E42C-738F-53A7221B89C6" name="Animal_Type_Animals_fk">
+<createdBy>llari</createdBy>
+<createdTime>2022-12-12 19:03:49 UTC</createdTime>
+<generatorID>927A6156-F5C2-8F19-5E83-EC39C21B71E2</generatorID>
+<ownerDesignName>ZOO_DM</ownerDesignName>
+<indexState>Foreign Key</indexState>
+<isSurrogateKey>false</isSurrogateKey>
+<indexColumnUsage>
+<colUsage columnID="A7D8DF9E-0355-262F-C292-DD4AD050D103"/>
+</indexColumnUsage>
+</ind_PK_UK>
+</indexes>
+</Table>

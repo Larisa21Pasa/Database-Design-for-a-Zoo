@@ -1,0 +1,63 @@
+<?xml version = '1.0' encoding = 'UTF-8'?>
+<TableProxyOraclev11g class="oracle.dbtools.crest.model.design.storage.oracle.v11g.TableProxyOraclev11g" name="Medical_Info" directorySegmentName="seg_0" id="511E0D52-5135-DE72-204B-63FF867B15AE">
+<createdBy>adim</createdBy>
+<createdTime>2024-04-22 16:01:12 UTC</createdTime>
+<ownerDesignName>ZOO_DM</ownerDesignName>
+<logging>YES</logging>
+<partitionedRowMovement>DISABLE</partitionedRowMovement>
+<temporaryChanged>false</temporaryChanged>
+<accessDriverType>oracle_loader</accessDriverType>
+<rejectLimit></rejectLimit>
+<columnProxies itemClass="oracle.dbtools.crest.model.design.storage.oracle.v12c.ColumnProxyOraclev12c">
+<ColumnProxy name="Medication" id="1CDB4944-78E4-016C-967B-3290D76AFE9D">
+<createdBy>adim</createdBy>
+<createdTime>2024-04-22 16:01:12 UTC</createdTime>
+<ownerDesignName>ZOO_DM</ownerDesignName>
+</ColumnProxy>
+<ColumnProxy name="Children" id="1DB96E20-0912-5902-044F-49BE99EF3722">
+<createdBy>adim</createdBy>
+<createdTime>2024-04-22 16:01:12 UTC</createdTime>
+<ownerDesignName>ZOO_DM</ownerDesignName>
+</ColumnProxy>
+<ColumnProxy name="ID_Animals" id="2B02B8A4-BC2D-D7EF-2EF7-8B0847357B21">
+<createdBy>adim</createdBy>
+<createdTime>2024-04-22 16:01:12 UTC</createdTime>
+<ownerDesignName>ZOO_DM</ownerDesignName>
+</ColumnProxy>
+<ColumnProxy name="Surgery" id="344A5192-58F6-49AF-99EF-B1A25D63B8B4">
+<createdBy>adim</createdBy>
+<createdTime>2024-04-22 16:01:12 UTC</createdTime>
+<ownerDesignName>ZOO_DM</ownerDesignName>
+</ColumnProxy>
+<ColumnProxy name="Birth_Date" id="520320E2-7954-7DB9-4E38-EE82B2CE219B">
+<createdBy>adim</createdBy>
+<createdTime>2024-04-22 16:01:12 UTC</createdTime>
+<ownerDesignName>ZOO_DM</ownerDesignName>
+</ColumnProxy>
+<ColumnProxy name="ID_Medical_Info" id="D7229A07-5672-A28D-3D4E-FE02F3EB3647">
+<createdBy>adim</createdBy>
+<createdTime>2024-04-22 16:01:12 UTC</createdTime>
+<ownerDesignName>ZOO_DM</ownerDesignName>
+</ColumnProxy>
+<ColumnProxy name="Data_Registration" id="DE3DE2A8-2F88-EB0A-37F9-0E0807971F28">
+<createdBy>adim</createdBy>
+<createdTime>2024-04-22 16:01:12 UTC</createdTime>
+<ownerDesignName>ZOO_DM</ownerDesignName>
+</ColumnProxy>
+</columnProxies>
+<foreignKeys>
+<ForeignKey class="oracle.dbtools.crest.model.design.storage.oracle.v10g.FKProxyOraclev10g" name="Animals_Medical_Info_fk" id="393D380F-0C2C-6CE5-50D1-95A3D091E8DB">
+<createdBy>adim</createdBy>
+<createdTime>2024-04-22 16:01:12 UTC</createdTime>
+<ownerDesignName>ZOO_DM</ownerDesignName>
+</ForeignKey>
+</foreignKeys>
+<primaryKeys>
+<PrimaryKey class="oracle.dbtools.crest.model.design.storage.oracle.v10g.PKProxyOraclev10g" name="Medical_Info_PK" id="A5B30619-91D3-E37B-645F-D3190694063D">
+<createdBy>adim</createdBy>
+<createdTime>2024-04-22 16:01:12 UTC</createdTime>
+<ownerDesignName>ZOO_DM</ownerDesignName>
+<indexSort>SORTED</indexSort>
+</PrimaryKey>
+</primaryKeys>
+</TableProxyOraclev11g>

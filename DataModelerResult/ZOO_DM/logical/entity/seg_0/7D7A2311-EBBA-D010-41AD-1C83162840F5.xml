@@ -1,0 +1,79 @@
+<?xml version = '1.0' encoding = 'UTF-8'?>
+<Entity class="oracle.dbtools.crest.model.design.logical.Entity" directorySegmentName="seg_0" id="7D7A2311-EBBA-D010-41AD-1C83162840F5" name="Animals">
+<createdBy>student</createdBy>
+<createdTime>2022-11-04 10:27:50 UTC</createdTime>
+<comment><![CDATA[main tabel where it is keeped id of animal and details about animal pen where it lives]]></comment>
+<commentInRDBMS><![CDATA[main tabel where it is keeped id of animal and details about animal pen where it lives]]></commentInRDBMS>
+<ownerDesignName>ZOO_DM</ownerDesignName>
+<engineerTo>
+<item key="36A68C80-3A7C-9C3A-0F1F-D6FD2EC2FACD" value="true"/>
+</engineerTo>
+<adequatelyNormalized>NO</adequatelyNormalized>
+<expectedVolumes>0</expectedVolumes>
+<fwdEngineeringStrategyName>Single Table</fwdEngineeringStrategyName>
+<growthPercent>0</growthPercent>
+<growthType>Year</growthType>
+<maxVolumes>9999999</maxVolumes>
+<minVolumes>0</minVolumes>
+<normalForm>Third</normalForm>
+<attributes itemClass="oracle.dbtools.crest.model.design.logical.Attribute">
+<Attribute name="ID_Animals" id="9E9D6FDB-3020-EF7A-FE07-EC33A60D525E">
+<createdBy>student</createdBy>
+<createdTime>2022-11-04 10:28:01 UTC</createdTime>
+<ownerDesignName>ZOO_DM</ownerDesignName>
+<engineerTo>
+<item key="36A68C80-3A7C-9C3A-0F1F-D6FD2EC2FACD" value="true"/>
+</engineerTo>
+<useDomainConstraints>false</useDomainConstraints>
+<use>1</use>
+<logicalDatatype>LOGDT019</logicalDatatype>
+<dataTypePrecision>3</dataTypePrecision>
+<ownDataTypeParameters>,3,</ownDataTypeParameters>
+</Attribute>
+<Attribute name="ID_Animal_Type" id="06ACC4B3-B1E9-A50D-5DA5-01E296AB427E">
+<createdBy>student</createdBy>
+<createdTime>2022-11-04 11:11:55 UTC</createdTime>
+<generatorID>927A6156-F5C2-8F19-5E83-EC39C21B71E2</generatorID>
+<ownerDesignName>ZOO_DM</ownerDesignName>
+<engineerTo>
+<item key="36A68C80-3A7C-9C3A-0F1F-D6FD2EC2FACD" value="true"/>
+</engineerTo>
+<referedAttribute>62166999-A768-AD9B-47D3-3AF38468C38B</referedAttribute>
+<useDomainConstraints>false</useDomainConstraints>
+<use>1</use>
+<logicalDatatype>LOGDT019</logicalDatatype>
+<dataTypePrecision>2</dataTypePrecision>
+<ownDataTypeParameters>,2,</ownDataTypeParameters>
+</Attribute>
+<Attribute name="ID_Animal_Pen" id="511F0351-976B-309F-7E6F-C690930088E3">
+<createdBy>student</createdBy>
+<createdTime>2022-11-04 11:17:57 UTC</createdTime>
+<generatorID>13E23C37-84A1-7671-9EEB-76A3CB5AA944</generatorID>
+<ownerDesignName>ZOO_DM</ownerDesignName>
+<engineerTo>
+<item key="36A68C80-3A7C-9C3A-0F1F-D6FD2EC2FACD" value="true"/>
+</engineerTo>
+<referedAttribute>5610980B-DA69-1FC0-856E-8BD49465493E</referedAttribute>
+<useDomainConstraints>false</useDomainConstraints>
+<use>1</use>
+<logicalDatatype>LOGDT019</logicalDatatype>
+<dataTypePrecision>2</dataTypePrecision>
+<ownDataTypeParameters>,,</ownDataTypeParameters>
+</Attribute>
+</attributes>
+<identifiers itemClass="oracle.dbtools.crest.model.design.logical.CandidateKey">
+<identifier id="0778CB75-FF51-3512-4D60-FD34A9F8924F" name="Animals PK">
+<createdBy>student</createdBy>
+<createdTime>2022-11-04 10:28:15 UTC</createdTime>
+<ownerDesignName>ZOO_DM</ownerDesignName>
+<shouldEngineer>false</shouldEngineer>
+<engineerTo>
+<item key="36A68C80-3A7C-9C3A-0F1F-D6FD2EC2FACD" value="false"/>
+</engineerTo>
+<pk>true</pk>
+<usedAttributes>
+<attributeRef>9E9D6FDB-3020-EF7A-FE07-EC33A60D525E</attributeRef>
+</usedAttributes>
+</identifier>
+</identifiers>
+</Entity>

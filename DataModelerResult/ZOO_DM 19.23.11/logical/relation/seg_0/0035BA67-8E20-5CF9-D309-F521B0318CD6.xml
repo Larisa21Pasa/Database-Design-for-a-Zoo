@@ -1,0 +1,21 @@
+<?xml version = '1.0' encoding = 'UTF-8'?>
+<Relation class="oracle.dbtools.crest.model.design.logical.Relation" name="Animals_Medical_Info_fk" directorySegmentName="seg_0" id="0035BA67-8E20-5CF9-D309-F521B0318CD6">
+<createdBy>Larisa</createdBy>
+<createdTime>2022-11-08 16:51:57 UTC</createdTime>
+<ownerDesignName>ZOO_DM</ownerDesignName>
+<engineerTo>
+<item key="36A68C80-3A7C-9C3A-0F1F-D6FD2EC2FACD" value="true"/>
+</engineerTo>
+<sourcePk>0778CB75-FF51-3512-4D60-FD34A9F8924F</sourcePk>
+<identifying>false</identifying>
+<nameOnSource>has registrations</nameOnSource>
+<nameOnTarget> registered for</nameOnTarget>
+<optionalSource>true</optionalSource>
+<optionalTarget>false</optionalTarget>
+<sourceCardinality>1</sourceCardinality>
+<sourceEntity>7D7A2311-EBBA-D010-41AD-1C83162840F5</sourceEntity>
+<targetCardinalityString>*</targetCardinalityString>
+<targetEntity>7119FB16-94B8-F805-8E02-A9129648C2DA</targetEntity>
+<transferable>true</transferable>
+<deleteRule>NO ACTION</deleteRule>
+</Relation>

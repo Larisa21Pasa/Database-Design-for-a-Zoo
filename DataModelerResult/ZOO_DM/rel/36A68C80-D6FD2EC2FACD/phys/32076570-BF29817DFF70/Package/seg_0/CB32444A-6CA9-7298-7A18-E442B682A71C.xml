@@ -1,0 +1,254 @@
+<?xml version = '1.0' encoding = 'UTF-8'?>
+<PackageOracle class="oracle.dbtools.crest.model.design.storage.oracle.PackageOracle" name="medical_info_package" directorySegmentName="seg_0" id="CB32444A-6CA9-7298-7A18-E442B682A71C">
+<createdBy>adim</createdBy>
+<createdTime>2024-04-25 14:10:08 UTC</createdTime>
+<ownerDesignName>ZOO_DM</ownerDesignName>
+<source>CREATE OR REPLACE PACKAGE medical_info_package AS
+    PROCEDURE add_medical_info (
+        p_id_animals        IN medical_info.id_animals%TYPE,
+        p_data_registration IN medical_info.data_registration%TYPE,
+        p_birth_date        IN medical_info.birth_date%TYPE,
+        p_children          IN medical_info.children%TYPE,
+        p_surgery           IN medical_info.surgery%TYPE,
+        p_medication        IN medical_info.medication%TYPE
+    );
+
+    PROCEDURE delete_medical_info (
+        p_id_medical IN medical_info.id_medical_info%TYPE
+    );
+
+    PROCEDURE update_medical_info (
+        p_id_medical IN medical_info.id_medical_info%TYPE,
+        p_choice     IN VARCHAR2,
+        p_updated    IN VARCHAR2
+    );
+
+    PROCEDURE display_medical_info;
+
+END medical_info_package;
+/
+
+CREATE OR REPLACE PACKAGE BODY medical_info_package AS
+
+    PROCEDURE add_medical_info (
+        p_id_animals        IN medical_info.id_animals%TYPE,
+        p_data_registration IN medical_info.data_registration%TYPE,
+        p_birth_date        IN medical_info.birth_date%TYPE,
+        p_children          IN medical_info.children%TYPE,
+        p_surgery           IN medical_info.surgery%TYPE,
+        p_medication        IN medical_info.medication%TYPE
+    ) IS
+        v_count          NUMBER;
+    BEGIN
+        SAVEPOINT savepoint_add_medical_info ;
+        BEGIN
+            --CHECK IF NOT NULL
+            IF p_id_animals IS NULL 
+            OR p_data_registration IS NULL 
+            OR p_birth_date IS NULL 
+            OR p_children IS NULL 
+            OR p_surgery IS NULL 
+            OR p_medication IS NULL THEN
+                RAISE_APPLICATION_ERROR(-20010, &apos;All fields must be provided.&apos;);
+            END IF;
+    
+            --CHEDK FOR ANIMAL TO EXISTS
+            SELECT COUNT(*)
+            INTO   v_count
+            FROM   animals
+            WHERE  id_animals = p_id_animals;
+    
+            IF v_count = 0 THEN
+                RAISE_APPLICATION_ERROR(-20011, &apos;Invalid animal ID.&apos;);
+            END IF;
+    
+            --INSERT
+             INSERT INTO medical_info (
+                id_animals,
+                data_registration,
+                birth_date,
+                children,
+                surgery,
+                medication
+            ) VALUES (
+                p_id_animals,
+                p_data_registration,
+                p_birth_date,
+                p_children,
+                p_surgery,
+                p_medication
+            );
+            
+            COMMIT;
+        EXCEPTION
+            
+            WHEN dup_val_on_index THEN
+                ROLLBACK TO savepoint_add_medical_info;
+                RAISE_APPLICATION_ERROR(-20001, &apos;A medical info with the same id already exists.&apos;);
+                
+            WHEN OTHERS THEN
+                ROLLBACK TO savepoint_add_medical_info;
+                RAISE_APPLICATION_ERROR(-20002, &apos;Error when trying to add medical info  to db &apos; || SQLERRM);
+
+        END;
+    END add_medical_info;
+
+     PROCEDURE delete_medical_info (
+            p_id_medical IN medical_info.id_medical_info%TYPE
+        )
+    IS
+        v_count    NUMBER;
+    BEGIN
+        SAVEPOINT savepoint_delete_medical_info;
+        
+        BEGIN
+            IF p_id_medical IS NULL 
+            OR p_id_medical = &apos;&apos; THEN
+                RAISE_APPLICATION_ERROR(-20001, &apos;ID MEDICAL INFO type must not be empty.&apos;);
+            END IF;
+            
+            SELECT COUNT(*)
+            INTO   v_count
+            FROM   medical_info
+            WHERE  id_medical_info = p_id_medical;
+
+            IF v_count = 0 THEN
+                RAISE_APPLICATION_ERROR(-20014, &apos;You are trying to delete an invalid medical info ID .&apos;);
+            END IF;
+            
+            DELETE FROM medical_info
+            WHERE id_medical_info = p_id_medical;
+            
+            IF SQL%NOTFOUND THEN
+                ROLLBACK TO delete_type_savepoint;
+                RAISE_APPLICATION_ERROR(-20004, &apos;Medical info id &apos; || p_id_medical || &apos; not found.&apos;);
+            END IF;
+    
+            COMMIT;
+        EXCEPTION
+             WHEN OTHERS THEN
+                    ROLLBACK TO savepoint_delete_medical_info;
+                    RAISE_APPLICATION_ERROR(-20005, &apos;Error in deleting medical info: &apos; || SQLERRM);
+        
+        END;
+        
+     END delete_medical_info;
+
+ PROCEDURE update_medical_info (
+        p_id_medical IN medical_info.id_medical_info%TYPE,
+        p_choice     IN VARCHAR2,
+        p_updated    IN VARCHAR2
+    )
+    IS
+         v_count NUMBER;
+         e_no_rows        EXCEPTION;
+         e_bad_choice     EXCEPTION;
+    BEGIN
+        SAVEPOINT savepoint_update_medical_info;
+        BEGIN
+         IF (p_choice = &apos;id_animals&apos;) THEN
+                IF p_updated IS NULL THEN
+                      RAISE_APPLICATION_ERROR(-20010, &apos;New value must not be null.&apos;);
+                END IF;
+                
+                SELECT COUNT(*)
+                INTO v_count
+                FROM animals
+                WHERE id_animals = TO_NUMBER(p_updated);
+                
+                IF v_count = 0 THEN
+                    RAISE_APPLICATION_ERROR(-20202, &apos;New id animal type does not exists&apos;);
+                END IF;  
+                
+                UPDATE medical_info
+                SET id_animals = TO_NUMBER(p_updated)
+                WHERE id_medical_info = p_id_medical;
+                
+        ELSIF (p_choice = &apos;data_registration&apos;) THEN
+                IF p_updated IS NULL THEN
+                      RAISE_APPLICATION_ERROR(-20010, &apos;New value must not be null.&apos;);
+                END IF;
+                
+                UPDATE medical_info
+                SET data_registration = TO_DATE(p_updated, &apos;dd-mm-yyyy&apos;)
+                WHERE id_medical_info = p_id_medical;
+                
+        ELSIF (p_choice = &apos;birth_date&apos;) THEN
+                IF p_updated IS NULL THEN
+                      RAISE_APPLICATION_ERROR(-20010, &apos;New value must not be null.&apos;);
+                END IF;
+                
+                UPDATE medical_info
+                SET birth_date =  TO_DATE(p_updated, &apos;dd-mm-yyyy&apos;)
+                WHERE id_medical_info = p_id_medical;
+                
+        ELSIF (p_choice = &apos;children&apos;) THEN
+                IF p_updated IS NULL THEN
+                      RAISE_APPLICATION_ERROR(-20010, &apos;New value must not be null.&apos;);
+                END IF;
+                
+                UPDATE medical_info
+                SET children = p_updated
+                WHERE id_medical_info = p_id_medical;
+                
+        ELSIF (p_choice = &apos;surgery&apos;) THEN
+                IF p_updated IS NULL THEN
+                      RAISE_APPLICATION_ERROR(-20010, &apos;New value must not be null.&apos;);
+                END IF;
+                
+                UPDATE medical_info
+                SET surgery = p_updated
+                WHERE id_medical_info = p_id_medical;
+                
+        ELSIF (p_choice = &apos;medication&apos;) THEN
+                IF p_updated IS NULL THEN
+                      RAISE_APPLICATION_ERROR(-20010, &apos;New value must not be null.&apos;);
+                END IF;
+                
+                UPDATE medical_info
+                SET medication = p_updated
+                WHERE id_medical_info = p_id_medical;
+                
+        ELSE
+            RAISE e_bad_choice;
+        END IF;
+
+        IF SQL%NOTFOUND THEN
+            RAISE e_no_rows;
+        END IF;
+        
+        COMMIT;
+        
+        EXCEPTION
+            WHEN e_bad_choice THEN
+                RAISE_APPLICATION_ERROR(-20201,  &apos;No attribute like &apos; || p_choice || &apos; found !&apos;);
+            WHEN e_no_rows THEN
+                RAISE_APPLICATION_ERROR(-20201, &apos;Medical info with id &apos; || p_id_medical || &apos; does not exist.&apos;);
+            WHEN OTHERS THEN
+                ROLLBACK TO savepoint_update_medical_info;
+                RAISE_APPLICATION_ERROR(-20002, &apos;Error in updating &apos; || p_id_medical || &apos;: &apos; || SQLERRM);
+        
+        END;
+    END update_medical_info;
+
+    
+    
+PROCEDURE display_medical_info IS
+BEGIN
+    FOR rec IN (SELECT *
+                FROM medical_info )
+    LOOP
+        DBMS_OUTPUT.PUT_LINE(&apos;Medical Info ID: &apos; || TO_CHAR(rec.id_medical_info));
+        DBMS_OUTPUT.PUT_LINE(&apos;Animal ID: &apos; || TO_CHAR(rec.id_animals));
+        DBMS_OUTPUT.PUT_LINE(&apos;Data Registration: &apos; || TO_CHAR(rec.data_registration, &apos;yyyy-mm-dd&apos;));
+        DBMS_OUTPUT.PUT_LINE(&apos;Birth Date: &apos; || TO_CHAR(rec.birth_date, &apos;yyyy-mm-dd&apos;));
+        DBMS_OUTPUT.PUT_LINE(&apos;Children: &apos; || rec.children);
+        DBMS_OUTPUT.PUT_LINE(&apos;Surgery: &apos; || rec.surgery);
+        DBMS_OUTPUT.PUT_LINE(&apos;Medication: &apos; || rec.medication);
+        DBMS_OUTPUT.PUT_LINE(&apos;-------------------------&apos;);
+    END LOOP;
+END display_medical_info;
+
+
+END medical_info_package;</source>
+</PackageOracle>

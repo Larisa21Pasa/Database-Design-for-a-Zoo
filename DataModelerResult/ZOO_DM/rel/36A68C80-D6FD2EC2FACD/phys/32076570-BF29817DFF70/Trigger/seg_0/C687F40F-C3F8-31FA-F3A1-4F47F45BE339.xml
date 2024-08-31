@@ -1,0 +1,14 @@
+<?xml version = '1.0' encoding = 'UTF-8'?>
+<TriggerOraclev10g class="oracle.dbtools.crest.model.design.storage.oracle.v10g.TriggerOraclev10g" name="medical_info_date_check_trg" directorySegmentName="seg_0" id="C687F40F-C3F8-31FA-F3A1-4F47F45BE339">
+<createdBy>adim</createdBy>
+<createdTime>2024-04-24 19:41:40 UTC</createdTime>
+<ownerDesignName>ZOO_DM</ownerDesignName>
+<actions>INSERT</actions>
+<body><![CDATA[BEGIN
+    IF :new.data_registration <= :new.birth_date OR :new.data_registration > SYSDATE THEN
+        RAISE_APPLICATION_ERROR(-20011, 'Data de înregistrare trebuie să fie ulterioară datei de naștere și să nu fie o dată viitoare.');
+    END IF;
+END;]]></body>
+<triggerTime>BEFORE</triggerTime>
+<table>511E0D52-5135-DE72-204B-63FF867B15AE</table>
+</TriggerOraclev10g>

@@ -1,0 +1,130 @@
+<?xml version = '1.0' encoding = 'UTF-8'?>
+<Table class="oracle.dbtools.crest.model.design.relational.Table" directorySegmentName="seg_0" id="511E0D52-5135-DE72-204B-63FF867B15AE" name="Medical_Info">
+<createdBy>llari</createdBy>
+<createdTime>2022-12-12 19:03:49 UTC</createdTime>
+<comment><![CDATA[contains records about medical life of animals to let employees know how every animal is feeling]]></comment>
+<commentInRDBMS><![CDATA[contains records about medical life of animals to let employees know how every animal is feeling]]></commentInRDBMS>
+<generatorID>7119FB16-94B8-F805-8E02-A9129648C2DA</generatorID>
+<ownerDesignName>ZOO_DM</ownerDesignName>
+<allowColumnReorder>false</allowColumnReorder>
+<existDependencyGenerateInDDl>true</existDependencyGenerateInDDl>
+<parsed>true</parsed>
+<columns itemClass="oracle.dbtools.crest.model.design.relational.Column">
+<Column name="ID_Medical_Info" id="D7229A07-5672-A28D-3D4E-FE02F3EB3647">
+<createdBy>llari</createdBy>
+<createdTime>2022-12-12 19:03:49 UTC</createdTime>
+<generatorID>7B0868CE-D5CC-2D89-4542-173E254CE384</generatorID>
+<ownerDesignName>ZOO_DM</ownerDesignName>
+<useDomainConstraints>false</useDomainConstraints>
+<use>1</use>
+<logicalDatatype>LOGDT019</logicalDatatype>
+<dataTypePrecision>2</dataTypePrecision>
+<ownDataTypeParameters>,2,</ownDataTypeParameters>
+<autoIncrementColumn>true</autoIncrementColumn>
+<autoIncrementCycle>false</autoIncrementCycle>
+</Column>
+<Column name="ID_Animals" id="2B02B8A4-BC2D-D7EF-2EF7-8B0847357B21">
+<createdBy>llari</createdBy>
+<createdTime>2022-12-12 19:03:49 UTC</createdTime>
+<generatorID>116E2B58-3F53-AE50-47F6-6B2332AC2266</generatorID>
+<ownerDesignName>ZOO_DM</ownerDesignName>
+<useDomainConstraints>false</useDomainConstraints>
+<use>1</use>
+<logicalDatatype>LOGDT019</logicalDatatype>
+<dataTypePrecision>3</dataTypePrecision>
+<ownDataTypeParameters>,3,</ownDataTypeParameters>
+<previousColumn>false</previousColumn>
+<autoIncrementCycle>false</autoIncrementCycle>
+<associations>
+<colAssociation fkAssociation="B2F6B1CE-41E7-EFFB-3B2F-24830514416A" referredColumn="CAB44045-9F9D-619A-F524-8F9E86D19835"/>
+</associations>
+</Column>
+<Column name="Data_Registration" id="DE3DE2A8-2F88-EB0A-37F9-0E0807971F28">
+<createdBy>llari</createdBy>
+<createdTime>2022-12-12 19:03:49 UTC</createdTime>
+<generatorID>5D2AA115-F9DB-05F0-3FC3-D85160B56650</generatorID>
+<ownerDesignName>ZOO_DM</ownerDesignName>
+<useDomainConstraints>false</useDomainConstraints>
+<use>1</use>
+<logicalDatatype>LOGDT007</logicalDatatype>
+<ownDataTypeParameters>,,</ownDataTypeParameters>
+<autoIncrementCycle>false</autoIncrementCycle>
+</Column>
+<Column name="Birth_Date" id="520320E2-7954-7DB9-4E38-EE82B2CE219B">
+<createdBy>llari</createdBy>
+<createdTime>2022-12-12 19:03:49 UTC</createdTime>
+<generatorID>5D3D3E5E-A558-61AA-4D79-739173802820</generatorID>
+<ownerDesignName>ZOO_DM</ownerDesignName>
+<useDomainConstraints>false</useDomainConstraints>
+<use>1</use>
+<logicalDatatype>LOGDT007</logicalDatatype>
+<ownDataTypeParameters>,,</ownDataTypeParameters>
+<autoIncrementCycle>false</autoIncrementCycle>
+</Column>
+<Column name="Children" id="1DB96E20-0912-5902-044F-49BE99EF3722">
+<createdBy>llari</createdBy>
+<createdTime>2022-12-12 19:03:49 UTC</createdTime>
+<generatorID>E002B14C-CA23-478F-9447-887F9BF2AED0</generatorID>
+<ownerDesignName>ZOO_DM</ownerDesignName>
+<useDomainConstraints>false</useDomainConstraints>
+<use>1</use>
+<logicalDatatype>LOGDT024</logicalDatatype>
+<dataTypeSize>5</dataTypeSize>
+<listOfValues>
+<valueDef value="No" description=""/>
+<valueDef value="Yes" description=""/>
+</listOfValues>
+<ownDataTypeParameters>5,,</ownDataTypeParameters>
+<autoIncrementCycle>false</autoIncrementCycle>
+</Column>
+<Column name="Surgery" id="344A5192-58F6-49AF-99EF-B1A25D63B8B4">
+<createdBy>llari</createdBy>
+<createdTime>2022-12-12 19:03:49 UTC</createdTime>
+<generatorID>D08D8676-FC09-EBD6-EDAB-289E131B465E</generatorID>
+<ownerDesignName>ZOO_DM</ownerDesignName>
+<useDomainConstraints>false</useDomainConstraints>
+<use>1</use>
+<logicalDatatype>LOGDT024</logicalDatatype>
+<dataTypeSize>50</dataTypeSize>
+<ownDataTypeParameters>50,,</ownDataTypeParameters>
+<autoIncrementCycle>false</autoIncrementCycle>
+</Column>
+<Column name="Medication" id="1CDB4944-78E4-016C-967B-3290D76AFE9D">
+<createdBy>llari</createdBy>
+<createdTime>2022-12-12 19:03:49 UTC</createdTime>
+<generatorID>54E1663A-41E4-7541-A1BA-82F3553B17EA</generatorID>
+<ownerDesignName>ZOO_DM</ownerDesignName>
+<useDomainConstraints>false</useDomainConstraints>
+<use>1</use>
+<logicalDatatype>LOGDT024</logicalDatatype>
+<dataTypeSize>50</dataTypeSize>
+<ownDataTypeParameters>50,,</ownDataTypeParameters>
+<autoIncrementCycle>false</autoIncrementCycle>
+</Column>
+</columns>
+<indexes itemClass="oracle.dbtools.crest.model.design.relational.Index">
+<ind_PK_UK id="A5B30619-91D3-E37B-645F-D3190694063D" name="Medical_Info_PK">
+<createdBy>llari</createdBy>
+<createdTime>2022-12-12 19:03:49 UTC</createdTime>
+<generatorID>A22B2362-6ED2-8636-A094-0F10023372BC</generatorID>
+<ownerDesignName>ZOO_DM</ownerDesignName>
+<pk>true</pk>
+<indexState>Primary Constraint</indexState>
+<isSurrogateKey>false</isSurrogateKey>
+<indexColumnUsage>
+<colUsage columnID="D7229A07-5672-A28D-3D4E-FE02F3EB3647"/>
+</indexColumnUsage>
+</ind_PK_UK>
+<ind_PK_UK id="393D380F-0C2C-6CE5-50D1-95A3D091E8DB" name="Animals_Medical_Info_fk">
+<createdBy>llari</createdBy>
+<createdTime>2022-12-12 19:03:49 UTC</createdTime>
+<generatorID>0035BA67-8E20-5CF9-D309-F521B0318CD6</generatorID>
+<ownerDesignName>ZOO_DM</ownerDesignName>
+<indexState>Foreign Key</indexState>
+<isSurrogateKey>false</isSurrogateKey>
+<indexColumnUsage>
+<colUsage columnID="2B02B8A4-BC2D-D7EF-2EF7-8B0847357B21"/>
+</indexColumnUsage>
+</ind_PK_UK>
+</indexes>
+</Table>

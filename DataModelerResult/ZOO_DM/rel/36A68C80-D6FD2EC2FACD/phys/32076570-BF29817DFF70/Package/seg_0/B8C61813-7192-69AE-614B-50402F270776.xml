@@ -1,0 +1,263 @@
+<?xml version = '1.0' encoding = 'UTF-8'?>
+<PackageOracle class="oracle.dbtools.crest.model.design.storage.oracle.PackageOracle" name="diet_package" directorySegmentName="seg_0" id="B8C61813-7192-69AE-614B-50402F270776">
+<createdBy>adim</createdBy>
+<createdTime>2024-04-25 16:12:49 UTC</createdTime>
+<ownerDesignName>ZOO_DM</ownerDesignName>
+<source>CREATE OR REPLACE PACKAGE diet_package AS
+
+    PROCEDURE add_diet (
+        p_id_food    IN diet.id_food%TYPE,
+        p_id_animals IN diet.id_animals%TYPE,
+        p_diet_type  IN diet.diet_type%TYPE,
+        p_quantity   IN diet.quantity%TYPE
+    );
+
+    PROCEDURE delete_diet (
+        p_id_diet IN diet.id_diet%TYPE
+    );
+
+    PROCEDURE update_diet (
+        p_id_diet   IN diet.id_diet%TYPE,
+        p_choice    IN VARCHAR2,
+        p_updated   IN VARCHAR2
+    );
+
+    PROCEDURE display_diet;
+END diet_package;
+/
+
+CREATE OR REPLACE PACKAGE BODY diet_package AS
+
+    PROCEDURE add_diet (
+        p_id_food    IN diet.id_food%TYPE,
+        p_id_animals IN diet.id_animals%TYPE,
+        p_diet_type  IN diet.diet_type%TYPE,
+        p_quantity   IN diet.quantity%TYPE
+    ) IS
+         v_count NUMBER;
+    BEGIN
+        SAVEPOINT savepoint_add_diet ;
+        BEGIN
+            -- CHECK FOR  NULL
+            IF p_id_food IS NULL 
+            OR p_id_animals IS NULL 
+            OR p_diet_type IS NULL 
+            OR p_quantity IS NULL 
+            THEN
+                RAISE_APPLICATION_ERROR(-20001, &apos;All fields must be provided.&apos;);
+            END IF;
+        
+            -- CHECK IF ALREADY EXISTS ANIMAL FK IN ITS OWN TABLE
+            SELECT COUNT(*)
+            INTO   v_count
+            FROM   animals
+            WHERE  id_animals = p_id_animals;
+    
+            IF v_count = 0 THEN
+                RAISE_APPLICATION_ERROR(-20011, &apos;Invalid animal type ID.&apos;);
+            END IF;
+    
+    
+            -- CHECK IF ALREADY EXISTS FOOD FK IN ITS OWN TABLE
+            SELECT COUNT(*)
+            INTO   v_count
+            FROM   food
+            WHERE  id_food = p_id_food;
+    
+            IF v_count = 0 THEN
+                RAISE_APPLICATION_ERROR(-20011, &apos;Invalid food  ID.&apos;);
+            END IF;
+            
+            
+            INSERT INTO diet (
+            id_food,
+            id_animals,
+            diet_type,
+            quantity
+            ) VALUES (
+                p_id_food,
+                p_id_animals,
+                p_diet_type,
+                p_quantity
+            );
+            
+            COMMIT;
+        EXCEPTION
+            WHEN dup_val_on_index THEN
+                ROLLBACK TO savepoint_add_diet;
+                RAISE_APPLICATION_ERROR(-20001, &apos;An diet with the same id already exists.&apos;);
+                
+            WHEN OTHERS THEN
+                ROLLBACK TO savepoint_add_diet;
+                RAISE_APPLICATION_ERROR(-20002, &apos;Error when trying to add diet  to db &apos; || SQLERRM);
+        END;
+    END add_diet;
+
+
+
+
+    PROCEDURE delete_diet (
+        p_id_diet IN diet.id_diet%TYPE
+    ) IS
+        v_count NUMBER;
+    BEGIN
+        SAVEPOINT delete_diet_savepoint;
+        BEGIN
+             -- CHECK IF ID IS VALID
+            IF p_id_diet IS NULL OR p_id_diet = &apos;&apos; THEN
+                RAISE_APPLICATION_ERROR(-20003, &apos;ID diet must not be empty.&apos;);
+            END IF;
+            
+            --CHECK FOR DIET ID IN CENTRAL TABEL -&gt; DIET
+            SELECT COUNT(*)
+            INTO   v_count
+            FROM   diet
+            WHERE  id_diet = p_id_diet;
+
+            IF v_count = 0 THEN
+                RAISE_APPLICATION_ERROR(-20004, &apos;You are trying to delete an invalid diet ID.&apos;);
+            END IF;
+            
+            -- PROPER DELETE OF ANIMAL 
+            DELETE FROM diet
+            WHERE   id_diet = p_id_diet;
+
+            -- CHECK FOR SUCCESSFUL DELETE OPERATION
+            IF SQL%NOTFOUND THEN
+                ROLLBACK TO delete_diet_savepoint;
+                RAISE_APPLICATION_ERROR(-20005, &apos;Diet with ID &apos; || p_id_diet || &apos; has not been deleted.&apos;);
+            END IF;
+            
+            COMMIT;
+        EXCEPTION
+            WHEN OTHERS THEN
+                ROLLBACK TO delete_diet_savepoint;
+                RAISE_APPLICATION_ERROR(-20020, &apos;Error in deleting diet: &apos; || SQLERRM);
+        END;
+    END delete_diet;
+
+
+
+
+    PROCEDURE update_diet (
+        p_id_diet  IN diet.id_diet%TYPE,
+        p_choice   IN VARCHAR2,
+        p_updated  IN VARCHAR2
+    ) IS
+        e_no_rows        EXCEPTION;
+        e_bad_choice     EXCEPTION;
+        v_count          NUMBER;
+    BEGIN
+        SAVEPOINT update_diet_savepoint;
+        BEGIN 
+            -- FIRST CHECK FOR FK SO IT MUST EXISTS
+            IF (p_choice = &apos;id_animals&apos;) THEN
+                IF p_updated IS NULL THEN
+                      RAISE_APPLICATION_ERROR(-20010, &apos;New value must not be null.&apos;);
+                END IF;
+                
+                SELECT COUNT(*)
+                INTO v_count
+                FROM animals
+                WHERE id_animals = TO_NUMBER(p_updated);
+                
+                IF v_count = 0 THEN
+                    RAISE_APPLICATION_ERROR(-20202, &apos;New id animal type does not exists&apos;);
+                END IF;
+       
+                UPDATE diet
+                SET id_animals = TO_NUMBER(p_updated)
+                WHERE id_diet = p_id_diet;
+                
+                IF SQL%NOTFOUND THEN
+                        RAISE e_no_rows;
+                END IF;
+                
+            -- FIRST CHECK FOR FK SO IT MUST EXISTS
+            ELSIF (p_choice = &apos;id_food&apos;) THEN
+                IF p_updated IS NULL THEN
+                      RAISE_APPLICATION_ERROR(-20010, &apos;New value must not be null.&apos;);
+                END IF;
+                
+                SELECT COUNT(*)
+                INTO v_count
+                FROM food
+                WHERE id_food = TO_NUMBER(p_updated);
+                
+                IF v_count = 0 THEN
+                    RAISE_APPLICATION_ERROR(-20202, &apos;New id food  does not exists&apos;);
+                END IF;
+                
+             
+                UPDATE diet
+                SET id_food = TO_NUMBER(p_updated)
+                WHERE id_diet = p_id_diet;
+                 
+                IF SQL%NOTFOUND THEN
+                        RAISE e_no_rows;
+                END IF;
+                
+            -- REST OF FIELDS FROM DIET  
+            ELSIF p_choice = &apos;diet_type&apos; THEN
+                IF p_updated IS NULL THEN
+                      RAISE_APPLICATION_ERROR(-20010, &apos;New value must not be null.&apos;);
+                END IF;
+                
+                UPDATE diet 
+                SET diet_type = p_updated 
+                WHERE id_diet = p_id_diet;
+                
+                IF SQL%NOTFOUND THEN
+                    RAISE e_no_rows;
+                END IF;
+                
+            ELSIF p_choice = &apos;quantity&apos; THEN
+                IF p_updated IS NULL THEN
+                      RAISE_APPLICATION_ERROR(-20010, &apos;New value must not be null.&apos;);
+                END IF;
+                
+                UPDATE diet
+                SET quantity = TO_NUMBER(p_updated) 
+                WHERE id_diet = p_id_diet;
+                
+                IF SQL%NOTFOUND THEN
+                    RAISE e_no_rows;
+                END IF;
+            ELSE
+                RAISE e_bad_choice;
+            END IF;
+            
+            COMMIT;
+        EXCEPTION
+            WHEN e_bad_choice THEN
+                RAISE_APPLICATION_ERROR(-20201,  &apos;No attribute like &apos;||p_choice||&apos; found !&apos;);
+            WHEN e_no_rows THEN
+                RAISE_APPLICATION_ERROR(-20201, &apos;dIET with id &apos; || p_id_diet || &apos; does not exists.&apos;);
+            WHEN OTHERS THEN
+                ROLLBACK TO update_diet_savepoint;
+                RAISE_APPLICATION_ERROR(-20002, &apos;Error in updating &apos; || p_id_diet || &apos;: &apos; || SQLERRM);
+         END;
+    END update_diet;
+
+    PROCEDURE display_diet IS
+    BEGIN
+        FOR rec IN (SELECT d.id_diet,
+                           f.food_type,
+                           a.name,
+                           d.diet_type,
+                           d.quantity
+                    FROM diet d
+                    JOIN food f ON d.id_food = f.id_food
+                    JOIN animal_info a ON d.id_animals = a.id_animals)
+        LOOP
+            DBMS_OUTPUT.PUT_LINE(&apos;Diet ID: &apos; || rec.id_diet);
+            DBMS_OUTPUT.PUT_LINE(&apos;Food Type: &apos; || rec.food_type);
+            DBMS_OUTPUT.PUT_LINE(&apos;Animal Name: &apos; || rec.name);
+            DBMS_OUTPUT.PUT_LINE(&apos;Diet Type: &apos; || rec.diet_type);
+            DBMS_OUTPUT.PUT_LINE(&apos;Quantity: &apos; || rec.quantity);
+            DBMS_OUTPUT.PUT_LINE(&apos;-------------------------&apos;);
+        END LOOP;
+    END display_diet;
+
+END diet_package;</source>
+</PackageOracle>

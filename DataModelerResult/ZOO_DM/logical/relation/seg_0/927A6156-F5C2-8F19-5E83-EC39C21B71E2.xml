@@ -1,0 +1,21 @@
+<?xml version = '1.0' encoding = 'UTF-8'?>
+<Relation class="oracle.dbtools.crest.model.design.logical.Relation" name="Animal_Type_Animals_fk" directorySegmentName="seg_0" id="927A6156-F5C2-8F19-5E83-EC39C21B71E2">
+<createdBy>student</createdBy>
+<createdTime>2022-11-04 11:11:55 UTC</createdTime>
+<ownerDesignName>ZOO_DM</ownerDesignName>
+<engineerTo>
+<item key="36A68C80-3A7C-9C3A-0F1F-D6FD2EC2FACD" value="true"/>
+</engineerTo>
+<sourcePk>A58F3AB2-2B20-23F0-8BC7-AF595302B033</sourcePk>
+<identifying>false</identifying>
+<nameOnSource>type for</nameOnSource>
+<nameOnTarget>animals</nameOnTarget>
+<optionalSource>true</optionalSource>
+<optionalTarget>false</optionalTarget>
+<sourceCardinality>1</sourceCardinality>
+<sourceEntity>A475D65C-BEAC-C806-ACB0-FD02B8DD6BF7</sourceEntity>
+<targetCardinalityString>*</targetCardinalityString>
+<targetEntity>7D7A2311-EBBA-D010-41AD-1C83162840F5</targetEntity>
+<transferable>true</transferable>
+<deleteRule>NO ACTION</deleteRule>
+</Relation>

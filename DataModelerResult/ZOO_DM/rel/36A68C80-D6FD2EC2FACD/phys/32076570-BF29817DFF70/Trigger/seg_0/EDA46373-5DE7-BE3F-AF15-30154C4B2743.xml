@@ -1,0 +1,37 @@
+<?xml version = '1.0' encoding = 'UTF-8'?>
+<TriggerOraclev10g class="oracle.dbtools.crest.model.design.storage.oracle.v10g.TriggerOraclev10g" name="update_food_quantity_trg" directorySegmentName="seg_0" id="EDA46373-5DE7-BE3F-AF15-30154C4B2743">
+<createdBy>adim</createdBy>
+<createdTime>2024-04-24 19:41:16 UTC</createdTime>
+<ownerDesignName>ZOO_DM</ownerDesignName>
+<actions>INSERT, UPDATE</actions>
+<body><![CDATA[
+DECLARE
+    existing_quantity NUMBER;
+    difference NUMBER;
+BEGIN
+
+    SELECT quantity_wk_food 
+    INTO existing_quantity
+    FROM food
+    WHERE id_food = :new.id_food;
+    
+
+    difference := NVL(:new.quantity, 0) - NVL(:old.quantity, 0);
+    
+
+    IF existing_quantity < ABS(difference) THEN
+        RAISE_APPLICATION_ERROR(-20005, 'Cantitatea disponibilă de ' || existing_quantity || ' este insuficientă pentru a adăuga ' || ABS(difference) || '.');
+    ELSE
+
+        UPDATE food
+        SET quantity_wk_food = existing_quantity - difference
+        WHERE id_food = :new.id_food;
+    END IF;
+EXCEPTION
+    WHEN NO_DATA_FOUND THEN
+        RAISE_APPLICATION_ERROR(-20006, 'ID_Food nu există în tabelul food.');
+END; 
+/]]></body>
+<triggerTime>AFTER</triggerTime>
+<table>B8ABDAA0-1F94-64EB-2730-60FFD787807D</table>
+</TriggerOraclev10g>
